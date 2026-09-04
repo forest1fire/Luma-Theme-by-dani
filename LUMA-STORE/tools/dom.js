@@ -273,12 +273,17 @@ function descendants(root, out = []) {
 /* ---------------------------------------------------------------- selectors */
 
 function parseSimple(text) {
-    const sel = { tag: null, id: null, classes: [], attrs: [], nots: [] };
+    const sel = { tag: null, id: null, classes: [], attrs: [], nots: [], pseudos: [] };
     let rest = text;
     const notRe = /:not\(([^)]*)\)/g;
     let m;
     while ((m = notRe.exec(rest))) sel.nots.push(parseSimple(m[1]));
     rest = rest.replace(notRe, '');
+    // Remaining pseudo-classes must be lifted out before the tag name is read,
+    // otherwise `:checked` would be mistaken for an element type.
+    const pseudoRe = /:([a-z-]+)/gi;
+    while ((m = pseudoRe.exec(rest))) sel.pseudos.push(m[1].toLowerCase());
+    rest = rest.replace(pseudoRe, '');
     const attrRe = /\[([^\]=]+)(?:=["']?([^\]"']*)["']?)?\]/g;
     while ((m = attrRe.exec(rest))) sel.attrs.push({ name: m[1].toLowerCase(), value: m[2] === undefined ? null : m[2] });
     rest = rest.replace(attrRe, '');
@@ -303,6 +308,38 @@ function matchesSimple(el, sel) {
         if (a.value !== null && el.getAttribute(a.name) !== a.value) return false;
     }
     for (const n of sel.nots) if (matchesSimple(el, n)) return false;
+    for (const p of sel.pseudos) {
+        switch (p) {
+            case 'checked':
+                if (el._checked !== true && !el.hasAttribute('checked')) return false;
+                break;
+            case 'selected':
+                if (el._selected !== true && !el.hasAttribute('selected')) return false;
+                break;
+            case 'disabled':
+                if (el._disabled !== true && !el.hasAttribute('disabled')) return false;
+                break;
+            case 'enabled':
+                if (el._disabled === true || el.hasAttribute('disabled')) return false;
+                break;
+            case 'visible':
+                // Approximation: the stub has no layout, so treat anything not
+                // explicitly hidden as visible.
+                if (el.hasAttribute('hidden')) return false;
+                break;
+            case 'hidden':
+                if (!el.hasAttribute('hidden')) return false;
+                break;
+            case 'empty':
+                if (el.childNodes.length || (el.textContent || '').trim()) return false;
+                break;
+            case 'first-child':
+                if (!el.parentNode || el.parentNode.children[0] !== el) return false;
+                break;
+            default:
+                return false;
+        }
+    }
     return true;
 }
 
@@ -377,12 +414,29 @@ function createWindow() {
     window.dispatchEvent = host.dispatchEvent.bind(host);
     window._host = host;
 
-    window.localStorage = {
-        getItem: (k) => (store.has(k) ? store.get(k) : null),
-        setItem: (k, v) => store.set(k, String(v)),
-        removeItem: (k) => store.delete(k),
-        clear: () => store.clear(),
+    function makeStorage() {
+        const map = new Map();
+        return {
+            getItem: (k) => (map.has(k) ? map.get(k) : null),
+            setItem: (k, v) => map.set(k, String(v)),
+            removeItem: (k) => map.delete(k),
+            clear: () => map.clear(),
+            get length() { return map.size; },
+            key: (i) => [...map.keys()][i] || null,
+        };
+    }
+    window.localStorage = makeStorage();
+    window.sessionStorage = makeStorage();
+
+    const historyEntries = [];
+    window.history = {
+        length: 1,
+        state: null,
+        pushState: function (state, title, url) { historyEntries.push({ type: 'push', state: state, url: url }); this.state = state; this.length++; },
+        replaceState: function (state, title, url) { historyEntries.push({ type: 'replace', state: state, url: url }); this.state = state; },
+        back: function () {},
     };
+    window._historyEntries = historyEntries;
 
     let darkPreferred = false;
     const mediaListeners = [];
@@ -407,11 +461,49 @@ function createWindow() {
     window._flushRaf = function () { const q = rafQueue; rafQueue = []; q.forEach((fn) => fn(window.scrollY)); };
     window.cancelAnimationFrame = function () {};
 
-    window.setInterval = function (fn) { window.timers.push(fn); return window.timers.length; };
-    window.clearInterval = function (id) { if (id) window.timers[id - 1] = null; };
-    window.setTimeout = function (fn) { window.timers.push(fn); return window.timers.length; };
-    window.clearTimeout = function (id) { if (id) window.timers[id - 1] = null; };
-    window._fireTimers = function () { const t = window.timers.slice(); window.timers = []; t.forEach((fn) => fn && fn()); };
+    // Timeouts and intervals are tracked separately so a test can assert that
+    // an interval was actually cleared rather than merely overwritten.
+    let timerSeq = 0;
+    const timeouts = new Map();
+    const intervals = new Map();
+    window.timers = [];
+
+    window.setTimeout = function (fn, ms) {
+        const id = ++timerSeq;
+        timeouts.set(id, { fn: fn, ms: ms || 0 });
+        return id;
+    };
+    window.clearTimeout = function (id) { timeouts.delete(id); };
+    window.setInterval = function (fn, ms) {
+        const id = ++timerSeq;
+        intervals.set(id, { fn: fn, ms: ms || 0 });
+        return id;
+    };
+    window.clearInterval = function (id) { intervals.delete(id); };
+
+    /** Run every due timeout once, and every interval once. */
+    window._fireTimers = function () {
+        const due = [...timeouts.entries()];
+        timeouts.clear();
+        for (const [, t] of due) t.fn();
+        for (const [, t] of [...intervals.entries()]) t.fn();
+        return due.length;
+    };
+    /** Run only the intervals, leaving them registered (as a browser would). */
+    window._fireIntervals = function () {
+        for (const [, t] of [...intervals.entries()]) t.fn();
+        return intervals.size;
+    };
+    /** Run only the queued timeouts, once each. */
+    window._fireTimeouts = function () {
+        const due = [...timeouts.entries()];
+        timeouts.clear();
+        for (const [, t] of due) t.fn();
+        return due.length;
+    };
+    window._pendingTimeouts = function () { return timeouts.size; };
+    window._pendingIntervals = function () { return intervals.size; };
+    window._timers = { timeouts: timeouts, intervals: intervals };
 
     window.MutationObserver = class {
         constructor(callback) { this.callback = callback; this.targets = []; document.observers.push(this); }
@@ -503,4 +595,15 @@ function loadHTML(html) {
     return { window, document, scripts };
 }
 
-module.exports = { loadHTML, createWindow, Node, Document, matches };
+/**
+ * Parse an HTML fragment into detached top-level nodes.
+ * Used by the jQuery double so `$('<div><span>x</span></div>')` keeps its
+ * children instead of collapsing to a single empty element.
+ */
+function fragment(document, html) {
+    const holder = new Node(document, 'fragment-host');
+    parseInto(document, holder, String(html));
+    return holder.childNodes.filter((n) => n.localName);
+}
+
+module.exports = { loadHTML, createWindow, Node, Document, matches, fragment };

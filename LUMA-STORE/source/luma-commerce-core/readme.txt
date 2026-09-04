@@ -74,6 +74,8 @@ Wishlist, compare and recently viewed collections are device-local by default, s
 * Escaped health-check output.
 * Fixed demo content writing a literal backslash-n instead of a newline.
 * Made core.js safe to include twice, removed .html() injection of server text, cleared expired countdown intervals and restored button labels after async actions.
+* Stopped offer countdown timers stacking on every WooCommerce fragment refresh, which overwrote the stored id so the previous timer could never be cleared; an offer that has already ended now arms no timer at all.
+* Routed the last two hardcoded interface strings (the coupon confirmation and an order-bump failure message) through the localized bundle.
 * Added clipboard failure handling for browsers without navigator.clipboard.
 * Made variation swatches keyboard accessible and added the stylesheet they were missing entirely.
 * Made every plugin string translatable and shipped a generated .pot template in languages/.

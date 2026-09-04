@@ -47,13 +47,19 @@ repeatable quality gates rather than manual inspection.
 - `core.js` had no load guard, so a second inclusion redeclared everything.
 - Filter empty and error states injected server text with `.html()`, an XSS sink;
   they now build text nodes only.
-- Offer countdowns kept their interval running forever after expiry.
+- Offer countdowns kept their interval running forever after expiry. A second
+  leak sat behind it: `initCountdowns()` re-runs on every WooCommerce fragment
+  refresh and armed a fresh interval each time, overwriting the stored id so the
+  previous timer could never be cleared. It now clears any existing timer first,
+  and arms none at all for an offer that has already ended.
 - Quick-add, coupon and share buttons changed their label and never restored it,
   leaving the control stuck on "Adding…".
 - Clipboard calls had no rejection handler and failed silently on Firefox and
   Safari, where `navigator.clipboard` can be absent.
 - Several ternaries were dead code, and every remaining aria-label was hardcoded
-  English.
+  English. Two user-visible strings survived the first internationalization pass
+  (the coupon confirmation and an order-bump failure message) and are now routed
+  through the localized bundle.
 - Variation swatches were unusable by keyboard. They are now a named
   `role="group"` with `aria-pressed` state, the hidden select is removed from the
   accessibility tree, and swatches re-sync on WooCommerce variation events.
@@ -102,9 +108,10 @@ Added under `LUMA-STORE/tools/`, all wired into `.github/workflows/luma-checks.y
 
 | Command | What it proves |
 | --- | --- |
-| `node tools/audit.js` | Escaping, duplicate ids, brace balance, version drift, header metadata, changelog presence, dead code, template hierarchy |
+| `node tools/audit.js` | Escaping, duplicate ids, brace balance, version drift, header metadata, changelog presence, i18n key coverage, dead code, template hierarchy |
 | `node tools/make-pot.js --check` | `.pot` templates match the strings actually in source |
 | `node tools/smoke-test.js` | `theme.js` executes against real markup and behaves correctly |
+| `node tools/core-smoke-test.js` | `core.js` executes on a jQuery double with AJAX intercepted |
 | `node tools/build-packages.js --check` | Shipped ZIPs match the source tree they were built from |
 
 `npm run verify` in `LUMA-STORE/tools/` runs all four.
@@ -113,10 +120,26 @@ Added under `LUMA-STORE/tools/`, all wired into `.github/workflows/luma-checks.y
 
 - Static audit: **0 errors** across 20 PHP, 7 CSS, 2 JS and 5 JSON files, with one
   standing warning for the undeclared WooCommerce compatibility headers.
-- Behaviour smoke test: **53 checks passed** — scheme toggle, view switcher, count
-  labels, mobile menu, search panel, scroll chrome and reading progress.
+- Behaviour tests: **53 theme checks** (scheme toggle, view switcher, count labels,
+  mobile menu, search panel, scroll chrome, reading progress) and **101 Core
+  checks** (variation swatches, countdowns, coupon and filter AJAX, injection
+  safety, collections, quick add, order bumps, bundles, share, predictive search).
 - Translation templates: 181 theme and 300 plugin entries, plural forms intact.
 - Package parity: theme, plugin and demo-kit digests match source.
+
+## What executing the code found
+
+Static analysis had already reported zero errors on these files. Running them
+found defects it could not see:
+
+1. `initCountdowns()` stacked an interval on every fragment refresh and lost the
+   id needed to clear it.
+2. Two strings were still hardcoded English after the internationalization pass.
+3. `filterEmptyState()` depends on the two-argument jQuery element factory, a
+   code path no static check exercised.
+4. A missing i18n key fails silently — the helper returns its English fallback
+   and nothing looks wrong — so an audit rule now requires every key a script
+   looks up to exist in the PHP bundle.
 
 ## House rules preserved
 

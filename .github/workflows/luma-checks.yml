@@ -47,8 +47,14 @@ jobs:
 
       # Executes theme.js in a minimal DOM built from the preview page and
       # asserts the observable behaviour of each feature it drives.
-      - name: Behaviour smoke test
+      - name: Theme behaviour
         run: node tools/smoke-test.js
+
+      # Executes core.js on the jQuery double with AJAX intercepted, covering
+      # variation swatches, countdowns, filtering, collections and injection
+      # safety.
+      - name: Core behaviour
+        run: node tools/core-smoke-test.js
 
       # Rebuilds the ZIPs from source and compares digests, so a package can
       # never drift away from the tree it was built from.

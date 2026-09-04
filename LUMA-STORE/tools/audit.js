@@ -549,6 +549,81 @@ function checkHeaders() {
     return { themeTested, coreTested };
 }
 
+/**
+ * Every key a script looks up in its localized bundle must actually be provided
+ * by the matching wp_localize_script() call. A typo or a forgotten key does not
+ * throw — the helper quietly returns the English fallback, so a translated site
+ * shows one stray English string and nothing looks wrong.
+ */
+function phpI18nKeys(text) {
+    const start = text.indexOf("'i18n'");
+    if (start === -1) return null;
+    const open = text.indexOf('array(', start);
+    if (open === -1) return null;
+    let depth = 0;
+    let end = -1;
+    for (let i = open + 'array'.length; i < text.length; i++) {
+        if (text[i] === '(') depth++;
+        else if (text[i] === ')') {
+            depth--;
+            if (depth === 0) { end = i; break; }
+        }
+    }
+    if (end === -1) return null;
+    const block = text.slice(open, end);
+    const keys = new Set();
+    for (const m of block.matchAll(/'([a-zA-Z0-9_]+)'\s*=>/g)) keys.add(m[1]);
+    return keys;
+}
+
+function jsI18nKeys(text, accessor) {
+    const keys = new Set();
+    // Direct lookups: t('key', …) / tt('key', …)
+    for (const m of text.matchAll(new RegExp('\\b' + accessor + '\\(\\s*[\'"]([a-zA-Z0-9_]+)[\'"]', 'g'))) keys.add(m[1]);
+    // Keys held in a table and passed to the accessor indirectly. The theme's
+    // count-label targets do this: { base: t('viewBag'), one: 'oneItemInBag',
+    // many: 'itemsInBag' }. Only one/many are indirect — `base` is already a
+    // direct call, and `key:` is used for unrelated descriptors in core.js.
+    for (const m of text.matchAll(/\b(?:one|many)\s*:\s*'([a-zA-Z0-9_]+)'/g)) keys.add(m[1]);
+    return keys;
+}
+
+function checkI18nKeys() {
+    const pairs = [
+        {
+            label: 'theme',
+            php: path.join(SOURCE, 'luma-commerce-theme', 'inc', 'core.php'),
+            js: path.join(SOURCE, 'luma-commerce-theme', 'assets', 'js', 'theme.js'),
+            accessor: 't',
+        },
+        {
+            label: 'Luma Core',
+            php: path.join(SOURCE, 'luma-commerce-core', 'luma-commerce-core.php'),
+            js: path.join(SOURCE, 'luma-commerce-core', 'assets', 'js', 'core.js'),
+            accessor: 'tt',
+        },
+    ];
+
+    for (const pair of pairs) {
+        if (!fs.existsSync(pair.php) || !fs.existsSync(pair.js)) continue;
+        const provided = phpI18nKeys(fs.readFileSync(pair.php, 'utf8'));
+        if (!provided) {
+            report('warn', pair.php, `${pair.label}: could not locate the wp_localize_script i18n array`);
+            continue;
+        }
+        const used = jsI18nKeys(fs.readFileSync(pair.js, 'utf8'), pair.accessor);
+        const missing = [...used].filter((key) => !provided.has(key)).sort();
+        if (missing.length) {
+            report(
+                'error',
+                pair.js,
+                `${pair.label} script looks up i18n key(s) the PHP bundle never provides: ${missing.join(', ')}. ` +
+                'They silently fall back to English on translated sites.'
+            );
+        }
+    }
+}
+
 /* --------------------------------------------------------------------- main */
 
 phpFiles.forEach(phpSyntax);
@@ -561,6 +636,7 @@ checkDuplicateIds();
 checkUndefinedHelpers();
 const versions = checkVersions();
 const headers = checkHeaders();
+checkI18nKeys();
 
 const errors = problems.filter((p) => p.level === 'error');
 const warns = problems.filter((p) => p.level === 'warn');

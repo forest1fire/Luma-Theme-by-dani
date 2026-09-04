@@ -119,6 +119,7 @@
 
 <div class="luma-container luma-home-conversion">
     <div class="luma-coupon-booster"><div><span class="luma-kicker">Private offer</span><strong>Use code for an extra saving</strong></div><button class="luma-apply-coupon" type="button" data-coupon="LUMA10"><span class="luma-coupon-code">LUMA10</span><span class="luma-coupon-action">Apply ↗</span></button><span class="luma-coupon-status" aria-live="polite"></span></div>
+    <div class="luma-countdown" data-end="2026-01-01T00:00:00+00:00"><span class="luma-countdown__label">Offer ended</span><span class="luma-countdown__time"><b data-unit="days">00</b><i>d</i><b data-unit="hours">00</b><i>h</i><b data-unit="minutes">00</b><i>m</i><b data-unit="seconds">00</b><i>s</i></span></div>
     <div class="luma-countdown" data-end="2026-12-31T23:59:00+00:00"><span class="luma-countdown__label">Offer ends in</span><span class="luma-countdown__time"><b data-unit="days">00</b><i>d</i><b data-unit="hours">00</b><i>h</i><b data-unit="minutes">00</b><i>m</i><b data-unit="seconds">00</b><i>s</i></span></div>
 </div>
 
@@ -159,6 +160,16 @@
                 <button class="luma-wishlist-toggle" type="button" data-wishlist-id="3" aria-label="Add to wish list" aria-pressed="false">♡</button>
                 <button class="luma-compare-toggle" type="button" data-compare-id="3" aria-label="Add to compare" aria-pressed="false">Compare</button>
                 <button class="luma-quick-view" type="button" data-product-id="3">Quick view</button>
+            </div>
+        </li>
+        <li class="product type-product luma-product-loop-item" data-product-id="5">
+            <a class="woocommerce-LoopProduct-link woocommerce-loop-product__link" href="#p5"><img src="../source/luma-commerce-theme/assets/images/luma-product-accessories.jpg" alt="Canvas Carry Tote" loading="lazy" decoding="async"></a>
+            <h2 class="woocommerce-loop-product__title"><a href="#p5">Canvas Carry Tote</a></h2>
+            <span class="price"><span class="woocommerce-Price-amount">$24.90</span></span>
+            <div class="luma-loop-actions">
+                <button class="luma-wishlist-toggle" type="button" data-wishlist-id="5" aria-label="Add to wish list" aria-pressed="false">♡</button>
+                <button class="luma-compare-toggle" type="button" data-compare-id="5" aria-label="Add to compare" aria-pressed="false">Compare</button>
+                <button class="luma-quick-view" type="button" data-product-id="5">Quick view</button>
             </div>
         </li>
         <li class="product type-product luma-product-loop-item" data-product-id="4">
@@ -214,6 +225,105 @@
     </section>
 </div></section>
 
+
+<section class="luma-preview-section"><div class="luma-container">
+    <h2>Storefront components</h2>
+    <p class="luma-preview-lede">Markup driven by Luma Core: the variation swatches it builds from a real WooCommerce select, AJAX filtering that carries <code>paged</code>, and the offer, waitlist and order-bump handlers.</p>
+
+    <form class="cart variations_form" data-product_id="1" data-luma-current-product="1">
+        <table class="variations">
+            <tbody>
+                <tr>
+                    <th class="label"><label for="pa_size">Size</label></th>
+                    <td class="value">
+                        <select id="pa_size" name="attribute_pa_size" data-attribute_name="attribute_pa_size">
+                            <option value="">Choose an option</option>
+                            <option value="s">S</option>
+                            <option value="m" selected>M</option>
+                            <option value="l">L</option>
+                            <option value="xl" disabled>XL</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="label"><label for="pa_colour">Colour</label></th>
+                    <td class="value">
+                        <select id="pa_colour" name="attribute_pa_colour">
+                            <option value="">Choose an option</option>
+                            <option value="ink">Ink</option>
+                            <option value="bone">Bone</option>
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="quantity"><label class="screen-reader-text" for="qty">Quantity</label><input id="qty" type="number" name="quantity" value="1" min="1"></div>
+        <button type="submit" class="single_add_to_cart_button">Add to bag</button>
+        <button type="button" class="luma-buy-now" data-product-id="1">Buy now</button>
+        <button type="button" class="luma-share-product" data-share-title="Boxy Heavyweight Tee"><span>Share</span></button>
+        <p class="luma-single-message" aria-live="polite"></p>
+    </form>
+
+    <form class="luma-shop-filters" data-luma-filters method="get" action="#shop">
+        <button type="button" data-luma-filter-toggle aria-expanded="false" aria-controls="luma-filter-panel">Filters</button>
+        <div id="luma-filter-panel" data-luma-filter-panel>
+            <select name="product_cat" aria-label="Category"><option value="">All categories</option><option value="men">Men</option><option value="women">Women</option></select>
+            <select name="orderby" aria-label="Sort by"><option value="date">Newest</option><option value="price">Price</option></select>
+            <label><input type="checkbox" name="in_stock" value="1"> In stock only</label>
+            <button type="button" data-luma-filter-close>Close</button>
+        </div>
+        <p data-luma-filter-count aria-live="polite">4 pieces</p>
+        <p class="luma-filter-summary" data-luma-filter-summary aria-live="polite"></p>
+        <button type="button" data-luma-clear-filter>Clear all</button>
+    </form>
+
+    <div id="luma-offer-popup" class="luma-offer-popup" hidden aria-hidden="true">
+        <button type="button" class="luma-offer-popup__close" aria-label="Close">×</button>
+        <strong>First order offer</strong>
+        <button type="button" class="luma-copy-offer" data-offer-code="LUMA10">Copy code</button>
+        <p class="luma-offer-popup__message" aria-live="polite"></p>
+    </div>
+
+    <div id="luma-quick-view-modal" class="luma-modal" hidden aria-hidden="true">
+        <button type="button" class="luma-modal__close" aria-label="Close">×</button>
+        <div class="luma-modal__body" data-quick-view-body></div>
+    </div>
+
+    <div class="luma-size-guide__modal" hidden aria-hidden="true">
+        <button type="button" class="luma-size-guide__close" aria-label="Close">×</button>
+    </div>
+    <button type="button" class="luma-size-guide__trigger">Size guide</button>
+
+    <form class="luma-waitlist-form" data-luma-waitlist data-product-id="4">
+        <label class="screen-reader-text" for="waitlist-email">Email address</label>
+        <input id="waitlist-email" type="email" name="email" placeholder="Email me when back in stock" required>
+        <button type="submit">Notify me</button>
+        <p class="luma-waitlist-message" aria-live="polite"></p>
+    </form>
+
+    <form class="luma-track-form" data-luma-track-form>
+        <label class="screen-reader-text" for="track-order">Order number</label>
+        <input id="track-order" type="text" name="order_id" placeholder="Order number" required>
+        <button type="submit">Track order</button>
+        <p class="luma-track-message" aria-live="polite"></p>
+    </form>
+
+    <div class="luma-order-bump" data-luma-order-bump data-product-id="5">
+        <label><input type="checkbox" class="luma-order-bump__toggle" value="1"> Add the carry tote for $12</label>
+        <p class="luma-order-bump__status" aria-live="polite"></p>
+    </div>
+    <div class="luma-bundle" data-luma-bundle data-bundle-id="3">
+        <strong>Build the edit</strong>
+        <label><input type="checkbox" name="bundle_item[]" value="1" checked> Boxy Heavyweight Tee</label>
+        <label><input type="checkbox" name="bundle_item[]" value="2" checked> Utility Overshirt</label>
+        <label><input type="checkbox" name="bundle_item[]" value="3"> Wide Leg Cargo</label>
+        <button type="button" class="luma-add-bundle" data-bundle-id="3" data-pieces="3">Add the bundle</button>
+        <p class="luma-bundle-status" aria-live="polite"></p>
+    </div>
+    <button type="button" class="luma-quick-view" data-product-id="2">Quick view</button>
+    <div class="luma-sticky-atc"><button type="button" class="luma-sticky-atc__button" data-product-id="1">Add to bag</button></div>
+</div></section>
+
 </main>
 
 <footer class="luma-site-footer">
@@ -248,6 +358,28 @@
 
 <script>
 /* Stubs for the objects WordPress injects via wp_localize_script(). */
+window.lumaCore = {
+    ajaxUrl: '/wp-admin/admin-ajax.php',
+    nonce: 'test-nonce',
+    account: false,
+    searchEnabled: true,
+    analyticsEnabled: false,
+    analyticsConsent: false,
+    compareLimit: 4,
+    i18n: {
+        addToWishlist: 'Add to wish list', removeFromWishlist: 'Remove from wish list',
+        addToCompare: 'Add to compare', removeFromCompare: 'Remove from compare',
+        addedToBag: 'Added to your bag', applied: 'Applied', copied: 'Copied',
+        checking: 'Checking…', saving: 'Saving…', adding: 'Adding…', removing: 'Removing…',
+        addingBundle: 'Adding bundle…', tryAgain: 'Please try again',
+        compareLimit: 'You can compare up to %d pieces', choosePiece: 'Choose an option',
+        nothingSaved: 'Nothing saved yet', saveFailed: 'Could not save that',
+        savedFailed: 'Could not save that', orderNotFound: 'We could not find that order',
+        shareText: 'Take a look at this', close: 'Close',
+        resultsCount: '%d pieces', page: 'Page', chooseOption: 'Choose an option',
+        noResults: 'No products found.', error: 'Please choose an option or try again.'
+    }
+};
 window.lumaTheme = {
     cartUrl: '#bag', shopUrl: '#shop', scheme: 'auto', schemeToggle: true,
     i18n: {

@@ -193,7 +193,7 @@ check('progress is clamped at 100%', progress.style.width === '100%', progress.s
 
 section('Progressive enhancement');
 check('no script writes raw English into aria labels', !/aria-label="(Search|Bag|Account)"[^>]*data-luma-scheme/.test(document.body.outerHTML));
-check('document survives the whole run', document.querySelectorAll('.product').length === 4);
+check('document survives the whole run', document.querySelectorAll('.product').length === 5, document.querySelectorAll('.product').length);
 
 console.log('\n' + '-'.repeat(58));
 if (failures.length) {

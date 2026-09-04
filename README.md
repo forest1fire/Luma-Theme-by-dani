@@ -35,8 +35,8 @@ cd LUMA-STORE/tools && npm ci && npm run verify
 ```
 
 That runs the static audit, checks the translation templates against source,
-executes `theme.js` against real markup, and confirms the packaged ZIPs match the
-source tree. The same four gates run in CI via
+executes both `theme.js` and `core.js` against real markup, and confirms the
+packaged ZIPs match the source tree. The same five gates run in CI via
 [`.github/workflows/luma-checks.yml`](.github/workflows/luma-checks.yml).
 
 ## Seeing it

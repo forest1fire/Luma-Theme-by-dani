@@ -126,6 +126,16 @@
         $('.luma-countdown').each(function () {
             var block = $(this), end = new Date(String(block.data('end')).replace(' ', 'T'));
             if (isNaN(end.getTime())) return;
+            // initCountdowns runs again after every WooCommerce fragment refresh.
+            // Clearing the previous timer first stops intervals stacking on the
+            // same node; without this the stored id is overwritten and the older
+            // timer can never be cleared, which is the leak the expiry check
+            // below was meant to prevent.
+            var previous = block.data('luma-countdown-timer');
+            if (previous) { window.clearInterval(previous); }
+            block.removeData('luma-countdown-timer');
+            block.removeData('luma-expired');
+            block.removeClass('is-expired');
             var tick = function () {
                 var seconds = Math.max(0, Math.floor((end.getTime() - Date.now()) / 1000));
                 if (seconds <= 0) { block.data('luma-expired', true); block.addClass('is-expired'); }
@@ -138,11 +148,13 @@
                 block.find('[data-unit="seconds"]').text(String(seconds).padStart(2, '0'));
             };
             tick();
-            // Stop the timer at zero: previously it kept running forever, and
-            // re-running init would stack a second interval on the same node.
+            // Nothing left to count: mark it expired and arm no timer at all, so
+            // a fragment refresh cannot re-arm one for an offer that has ended.
+            if (block.data('luma-expired')) { block.removeData('luma-countdown-timer'); return; }
+            // Stop the timer at zero: previously it kept running forever.
             var timer = window.setInterval(function () {
                 tick();
-                if (block.data('luma-expired')) { window.clearInterval(timer); }
+                if (block.data('luma-expired')) { window.clearInterval(timer); block.removeData('luma-countdown-timer'); }
             }, 1000);
             block.data('luma-countdown-timer', timer);
         });
@@ -266,7 +278,7 @@
     $(document).on('click', '.luma-apply-coupon', function () {
         var button = $(this), status = button.closest('.luma-coupon-booster').find('.luma-coupon-status');
         button.addClass('is-loading').prop('disabled', true); safeText(status, tt('checking', 'Checking\u2026'));
-        $.post(lumaCore.ajaxUrl, { action: 'luma_apply_coupon', nonce: lumaCore.nonce, coupon: button.data('coupon') }).done(function (response) { safeText(status, response.data && response.data.message); if (response.success) { button.addClass('is-applied').find('.luma-coupon-action').text('Applied ✓'); lumaEvent('apply_promotion', { promotion_id: String(button.data('coupon')) }); refreshDrawer(false); } }).fail(function (xhr) { status.text(xhr.responseJSON && xhr.responseJSON.data ? xhr.responseJSON.data.message : lumaCore.i18n.error); }).always(function () { button.removeClass('is-loading').prop('disabled', false); });
+        $.post(lumaCore.ajaxUrl, { action: 'luma_apply_coupon', nonce: lumaCore.nonce, coupon: button.data('coupon') }).done(function (response) { safeText(status, response.data && response.data.message); if (response.success) { button.addClass('is-applied').find('.luma-coupon-action').text(tt('applied', 'Applied') + ' \u2713'); lumaEvent('apply_promotion', { promotion_id: String(button.data('coupon')) }); refreshDrawer(false); } }).fail(function (xhr) { status.text(xhr.responseJSON && xhr.responseJSON.data ? xhr.responseJSON.data.message : lumaCore.i18n.error); }).always(function () { button.removeClass('is-loading').prop('disabled', false); });
     });
 
     $(document).on('click', '.luma-add-bundle', function () {
@@ -280,7 +292,7 @@
     $(document).on('change', '.luma-order-bump__toggle', function () {
         var toggle = $(this), box = toggle.closest('[data-luma-order-bump]'), status = box.find('.luma-order-bump__status'), add = toggle.is(':checked');
         toggle.prop('disabled', true); safeText(status, add ? tt('adding', 'Adding\u2026') : tt('removing', 'Removing\u2026'));
-        $.post(lumaCore.ajaxUrl, { action: 'luma_toggle_order_bump', nonce: lumaCore.nonce, product_id: box.data('product-id'), add: add ? 1 : 0 }).done(function (response) { safeText(status, response.data && response.data.message); if (response.success) { setCartCount(response.data.count); lumaEvent(add ? 'add_to_cart' : 'remove_from_cart', { item_id: String(box.data('product-id')), item_list_name: 'checkout order bump' }); $(document.body).trigger('update_checkout'); } else toggle.prop('checked', !add); }).fail(function () { toggle.prop('checked', !add); status.text('Please try again.'); }).always(function () { toggle.prop('disabled', false); });
+        $.post(lumaCore.ajaxUrl, { action: 'luma_toggle_order_bump', nonce: lumaCore.nonce, product_id: box.data('product-id'), add: add ? 1 : 0 }).done(function (response) { safeText(status, response.data && response.data.message); if (response.success) { setCartCount(response.data.count); lumaEvent(add ? 'add_to_cart' : 'remove_from_cart', { item_id: String(box.data('product-id')), item_list_name: 'checkout order bump' }); $(document.body).trigger('update_checkout'); } else toggle.prop('checked', !add); }).fail(function () { toggle.prop('checked', !add); safeText(status, tt('tryAgain', 'Please try again.')); }).always(function () { toggle.prop('disabled', false); });
     });
     $(document).on('click', '.luma-wishlist-toggle', function () {
         var button = $(this), id = String(button.data('wishlist-id')), ids = storage.get('lumaWishlist'), index = ids.indexOf(id);
