@@ -624,6 +624,203 @@ function checkI18nKeys() {
     }
 }
 
+
+
+/**
+ * WooCommerce calls that are reachable while WooCommerce is inactive.
+ *
+ * Luma Core already fataled once this way: the offer and size-guide popups
+ * called WooCommerce functions with no guard, so any site without the plugin
+ * active hit a fatal error. A guard only counts if it sits between the entry
+ * point and the call, so this walks the AST instead of grepping.
+ *
+ * A function is treated as safe when any of these hold:
+ *   - some enclosing `if` / ternary tests for WooCommerce (function_exists,
+ *     class_exists, method_exists, or a Luma availability helper);
+ *   - its own body contains such a test — the usual
+ *     `if ( ! class_exists( 'WooCommerce' ) ) return;` early exit;
+ *   - it is only reached from WooCommerce's own hooks, which cannot fire when
+ *     WooCommerce is inactive;
+ *   - every call site is itself safe, so the guard lives in the caller. That
+ *     last rule is what makes helpers like luma_core_cart_payload() correct:
+ *     they hold no guard, but each AJAX handler that calls them checks
+ *     luma_core_cart_available() first.
+ *
+ * WooCommerce's own template overrides are skipped: WordPress only loads them
+ * through WooCommerce.
+ */
+const WC_CALL = /^(WC|wc_[a-z0-9_]+|is_cart|is_checkout|is_checkout_pay_page|is_product|is_product_category|is_product_tag|is_product_taxonomy|is_shop|is_woocommerce|is_account_page|is_wc_endpoint_url|is_store_notice_showing)$/;
+const WC_CLASS = /^WC_/;
+const GUARD_RE = /class_exists|function_exists|method_exists|is_plugin_active|luma_core_wc_active|luma_core_cart_available|luma_core_session_available|luma_core_woocommerce|shortcode_exists/;
+const WC_HOOK = /^(woocommerce_|wc_|woocommerce$)/;
+
+function astWalk(node, visit, ancestors) {
+    if (!node || typeof node !== 'object') return;
+    if (Array.isArray(node)) {
+        for (const child of node) astWalk(child, visit, ancestors);
+        return;
+    }
+    if (typeof node.kind !== 'string') return;
+    visit(node, ancestors);
+    ancestors.push(node);
+    for (const key of Object.keys(node)) {
+        if (key === 'loc' || key === 'position' || key === 'offset') continue;
+        const value = node[key];
+        if (value && typeof value === 'object') astWalk(value, visit, ancestors);
+    }
+    ancestors.pop();
+}
+
+function nodeSource(node, lines) {
+    if (!node || !node.loc) return '';
+    const start = node.loc.start.line;
+    const end = node.loc.end ? node.loc.end.line : start;
+    return lines.slice(start - 1, end).join('\n');
+}
+
+function nodeName(node) {
+    if (!node) return null;
+    if (node.kind === 'name') return node.name;
+    if (node.kind === 'string') return node.value;
+    return null;
+}
+
+function checkWooCommerceGuards(file) {
+    if (!parser) return;
+    // WooCommerce template overrides are only ever loaded by WooCommerce.
+    if (/(^|\/)woocommerce\/[^/]+\.php$/.test(file.split(path.sep).join('/'))) return;
+
+    const code = fs.readFileSync(file, 'utf8');
+    const lines = code.split('\n');
+    let ast;
+    try {
+        ast = parser.parseCode(code, path.basename(file));
+    } catch (err) {
+        return; // syntax errors are reported by phpSyntax()
+    }
+
+    const functions = new Map();   // name -> { name, body, hooks: [], wcCalls: [] }
+    const callSites = new Map();   // callee -> [{ caller, guarded, line }]
+    const nodeToFn = new Map();
+
+    function enclosingFn(ancestors) {
+        for (let i = ancestors.length - 1; i >= 0; i--) {
+            const a = ancestors[i];
+            if (a.kind === 'function' || a.kind === 'method' || a.kind === 'closure') {
+                if (nodeToFn.has(a)) return nodeToFn.get(a);
+            }
+        }
+        return null;
+    }
+
+    /** Is any enclosing conditional testing for WooCommerce? */
+    function insideGuard(ancestors) {
+        return ancestors.some((a) => {
+            if (a.kind !== 'if' && a.kind !== 'retif' && a.kind !== 'while') return false;
+            return GUARD_RE.test(nodeSource(a.test, lines));
+        });
+    }
+
+    // Pass 1 — register every function declaration.
+    astWalk(ast, function (node) {
+        if (node.kind !== 'function' && node.kind !== 'method') return;
+        const name = (node.name && (node.name.name || node.name)) || null;
+        if (!name) return;
+        const record = {
+            name: name,
+            node: node,
+            body: nodeSource(node, lines),
+            hooks: [],
+            wcCalls: [],
+            line: node.loc && node.loc.start ? node.loc.start.line : 0,
+        };
+        functions.set(name, record);
+        nodeToFn.set(node, record);
+    }, []);
+
+    // Pass 2 — hook registrations, WooCommerce calls and internal call sites.
+    astWalk(ast, function (node, ancestors) {
+        if (node.kind !== 'call' && node.kind !== 'new') return;
+        const name = node.kind === 'new' ? nodeName(node.what) : nodeName(node.what);
+        if (!name) return;
+        const caller = enclosingFn(ancestors);
+        const guarded = insideGuard(ancestors);
+        const line = node.loc && node.loc.start ? node.loc.start.line : 0;
+
+        if (node.kind === 'call' && (name === 'add_action' || name === 'add_filter')) {
+            const args = node.arguments || [];
+            const hookName = nodeName(args[0]);
+            let cbName = nodeName(args[1]);
+            if (!cbName && args[1] && args[1].kind === 'closure') cbName = null;
+            if (hookName && cbName && functions.has(cbName)) functions.get(cbName).hooks.push(hookName);
+            return;
+        }
+
+        const isWc = node.kind === 'new' ? WC_CLASS.test(name) : (WC_CALL.test(name) || WC_CLASS.test(name));
+        if (isWc) {
+            const label = node.kind === 'new' ? 'new ' + name : name;
+            if (caller) caller.wcCalls.push({ name: label, line: line, guarded: guarded });
+            else if (!guarded) {
+                // Top-level template code with no conditional around it.
+                report(
+                    'warn', file,
+                    `Unguarded ${label} at template top level. This fatals when WooCommerce is inactive.`,
+                    line
+                );
+            }
+            return;
+        }
+
+        // Internal call: record it so caller safety can propagate.
+        if (functions.has(name)) {
+            if (!callSites.has(name)) callSites.set(name, []);
+            callSites.get(name).push({ caller: caller ? caller.name : null, guarded: guarded, line: line });
+        }
+    }, []);
+
+    // Pass 3 — decide which functions are safe, propagating through callers.
+    const safe = new Map();
+    function ownGuard(f) {
+        return GUARD_RE.test(f.body) || (f.hooks.length > 0 && f.hooks.every((h) => WC_HOOK.test(h)));
+    }
+    for (const f of functions.values()) safe.set(f.name, ownGuard(f));
+
+    for (let round = 0; round < 6; round++) {
+        let changed = false;
+        for (const f of functions.values()) {
+            if (safe.get(f.name) || !f.wcCalls.length) continue;
+            const sites = callSites.get(f.name) || [];
+            if (!sites.length) continue; // unreachable: nothing calls it
+            const allSafe = sites.every((site) => {
+                if (site.guarded) return true;
+                return site.caller !== null && safe.get(site.caller) === true;
+            });
+            if (allSafe) { safe.set(f.name, true); changed = true; }
+        }
+        if (!changed) break;
+    }
+
+    // Pass 4 — report.
+    for (const f of functions.values()) {
+        if (!f.wcCalls.length || safe.get(f.name)) continue;
+        const unguardedSites = f.wcCalls.filter((c) => !c.guarded);
+        if (!unguardedSites.length) continue;
+        const names = [...new Set(unguardedSites.map((c) => c.name))].slice(0, 4).join(', ');
+        const sites = callSites.get(f.name) || [];
+        const reach = f.hooks.length
+            ? 'hooked to ' + [...new Set(f.hooks)].join(', ')
+            : sites.length
+                ? 'called from ' + [...new Set(sites.map((s) => s.caller || 'template top level'))].slice(0, 3).join(', ')
+                : 'no caller found';
+        report(
+            'warn', file,
+            `${f.name}() calls ${names} with no WooCommerce guard (${unguardedSites.length} unguarded site${unguardedSites.length === 1 ? '' : 's'}; ${reach}). ` +
+            'This fatals when WooCommerce is inactive.',
+            unguardedSites[0].line
+        );
+    }
+}
+
 /* --------------------------------------------------------------------- main */
 
 phpFiles.forEach(phpSyntax);
@@ -637,6 +834,7 @@ checkUndefinedHelpers();
 const versions = checkVersions();
 const headers = checkHeaders();
 checkI18nKeys();
+for (const file of phpFiles) checkWooCommerceGuards(file);
 
 const errors = problems.filter((p) => p.level === 'error');
 const warns = problems.filter((p) => p.level === 'warn');

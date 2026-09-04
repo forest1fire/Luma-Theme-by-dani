@@ -108,7 +108,7 @@ Added under `LUMA-STORE/tools/`, all wired into `.github/workflows/luma-checks.y
 
 | Command | What it proves |
 | --- | --- |
-| `node tools/audit.js` | Escaping, duplicate ids, brace balance, version drift, header metadata, changelog presence, i18n key coverage, dead code, template hierarchy |
+| `node tools/audit.js` | Escaping, duplicate ids, brace balance, version drift, header metadata, changelog presence, i18n key coverage, WooCommerce guard reachability, dead code, template hierarchy |
 | `node tools/make-pot.js --check` | `.pot` templates match the strings actually in source |
 | `node tools/smoke-test.js` | `theme.js` executes against real markup and behaves correctly |
 | `node tools/core-smoke-test.js` | `core.js` executes on a jQuery double with AJAX intercepted |
@@ -140,6 +140,27 @@ found defects it could not see:
 4. A missing i18n key fails silently — the helper returns its English fallback
    and nothing looks wrong — so an audit rule now requires every key a script
    looks up to exist in the PHP bundle.
+
+## WooCommerce guard reachability
+
+The popup fatal was one instance of a general risk: Luma Core calls the
+WooCommerce API in over sixty places, and any of them reached while WooCommerce
+is inactive is a fatal error. Grepping cannot answer this, because a guard only
+counts if it sits between the entry point and the call.
+
+The audit now walks the PHP AST and treats a function as safe when an enclosing
+`if` or ternary tests for WooCommerce, when its own body does (the usual
+`if ( ! class_exists( 'WooCommerce' ) ) return;`), when it is only reached from
+WooCommerce's own hooks, or when every call site is itself safe. That last rule
+propagates, so helpers such as `luma_core_cart_payload()` are correctly judged
+safe: they hold no guard of their own, but each AJAX handler that calls them
+checks `luma_core_cart_available()` first. WooCommerce's own template overrides
+are skipped, since WordPress only loads them through WooCommerce.
+
+Result: **no unguarded WooCommerce call site remains** in either package. The
+rule was verified by negative test — removing the ternary guard in
+`front-page.php` and removing one caller's availability check both produce
+warnings that name the function and its callers.
 
 ## House rules preserved
 
