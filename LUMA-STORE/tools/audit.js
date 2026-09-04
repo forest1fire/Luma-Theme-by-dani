@@ -821,6 +821,71 @@ function checkWooCommerceGuards(file) {
     }
 }
 
+
+/**
+ * Classes that JavaScript creates must have CSS.
+ *
+ * The variation swatches shipped with markup and no stylesheet at all: the
+ * feature was invisible, and no template preview would ever show it because the
+ * nodes only exist at runtime. This is deliberately narrow — only element
+ * factories, and only the project's own `luma-` namespace. A broad "every class
+ * used must be defined" rule is not usable here, because plenty of classes are
+ * styled through a parent flex/grid rule, a descendant selector, or a second
+ * class on the same element, and all of those read as false positives.
+ */
+function collectCssClasses() {
+    const defined = new Set();
+    for (const file of cssFiles) {
+        const text = fs.readFileSync(file, 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
+        for (const m of text.matchAll(/\.(-?[_a-zA-Z][_a-zA-Z0-9-]*)/g)) defined.add(m[1]);
+    }
+    return defined;
+}
+
+function checkJsCreatedClasses() {
+    const defined = collectCssClasses();
+    const created = new Map();
+
+    for (const file of jsFiles) {
+        const lines = fs.readFileSync(file, 'utf8').split('\n');
+        lines.forEach(function (line, index) {
+            const where = file + ':' + (index + 1);
+            const patterns = [
+                // $('<div class="luma-x"></div>')
+                /\$\(\s*'<[^']*?\bclass\s*=\s*(["'])([^"']+)\1/g,
+                // $("<div class='luma-x'></div>")
+                /\$\(\s*"<[^"]*?\bclass\s*=\s*(')([^"]+)\1/g,
+                // $('<li>', { 'class': 'luma-x' })
+                /\$\(\s*'<[a-zA-Z][^']*>'\s*,\s*\{\s*'?class'?\s*:\s*'([^']+)'/g,
+                // element.className = 'luma-x'
+                /className\s*=\s*'([^']+)'/g,
+            ];
+            for (const re of patterns) {
+                for (const m of line.matchAll(re)) {
+                    const value = m[2] !== undefined ? m[2] : m[1];
+                    for (const cls of String(value).split(/\s+/)) {
+                        if (!cls.startsWith('luma-')) continue;
+                        if (!created.has(cls)) created.set(cls, []);
+                        created.get(cls).push(where);
+                    }
+                }
+            }
+        });
+    }
+
+    for (const [cls, sites] of [...created].sort()) {
+        if (defined.has(cls)) continue;
+        report(
+            'error',
+            sites[0].split(':')[0],
+            `JavaScript creates class "${cls}" but no stylesheet defines it, so the element renders unstyled. ` +
+            'Created at ' + sites.slice(0, 3).map((s) => s.split('/').slice(-2).join('/')).join(', ') + '.',
+            parseInt(sites[0].split(':').pop(), 10)
+        );
+    }
+    return created.size;
+}
+
 /* --------------------------------------------------------------------- main */
 
 phpFiles.forEach(phpSyntax);
@@ -835,6 +900,7 @@ const versions = checkVersions();
 const headers = checkHeaders();
 checkI18nKeys();
 for (const file of phpFiles) checkWooCommerceGuards(file);
+checkJsCreatedClasses();
 
 const errors = problems.filter((p) => p.level === 'error');
 const warns = problems.filter((p) => p.level === 'warn');

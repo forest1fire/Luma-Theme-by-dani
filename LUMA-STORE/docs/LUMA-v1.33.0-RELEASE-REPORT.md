@@ -65,6 +65,12 @@ repeatable quality gates rather than manual inspection.
   accessibility tree, and swatches re-sync on WooCommerce variation events.
 - The injected `.luma-variation-swatches` markup had no stylesheet at all. The
   missing rules are in `core.css` and use theme tokens with light-mode fallbacks.
+- Three more injected elements had markup but no rule, so they fell back to
+  browser defaults: `.luma-collection-loading` is a `<span>` inside a four-column
+  grid and rendered squeezed into one quarter-width cell instead of spanning it;
+  `.luma-cart-drawer__saved` had none of the separation its recommendations
+  sibling has; `.luma-cart-notices` had no spacing once populated. All three are
+  now styled, and the two drawer regions take no space while empty.
 
 ## Upgrades added
 
@@ -108,7 +114,7 @@ Added under `LUMA-STORE/tools/`, all wired into `.github/workflows/luma-checks.y
 
 | Command | What it proves |
 | --- | --- |
-| `node tools/audit.js` | Escaping, duplicate ids, brace balance, version drift, header metadata, changelog presence, i18n key coverage, WooCommerce guard reachability, dead code, template hierarchy |
+| `node tools/audit.js` | Escaping, duplicate ids, brace balance, version drift, header metadata, changelog presence, i18n key coverage, WooCommerce guard reachability, JS-created class coverage, dead code, template hierarchy |
 | `node tools/make-pot.js --check` | `.pot` templates match the strings actually in source |
 | `node tools/smoke-test.js` | `theme.js` executes against real markup and behaves correctly |
 | `node tools/core-smoke-test.js` | `core.js` executes on a jQuery double with AJAX intercepted |
@@ -161,6 +167,27 @@ Result: **no unguarded WooCommerce call site remains** in either package. The
 rule was verified by negative test — removing the ternary guard in
 `front-page.php` and removing one caller's availability check both produce
 warnings that name the function and its callers.
+
+## Unstyled injected markup
+
+The swatch stylesheet was found by hand. To stop the same class of bug recurring,
+the audit now requires every `luma-` class that JavaScript creates in an element
+factory to exist in a shipped stylesheet. Runtime-created nodes are the risky
+case precisely because no template preview ever shows them.
+
+The rule is deliberately narrow. A broad "every class used anywhere must be
+defined" check was tried and rejected: it produced 32 findings, and every one
+examined was legitimate — classes styled through a parent flex or grid rule
+(`.luma-coupon-code` inside the flex `.luma-apply-coupon`), through a descendant
+selector (`.luma-mini-cart` under `.luma-cart-drawer__body ul`), through a second
+class on the same element (`.luma-recommendation__quick-add` also carries
+`.luma-quick-add`), or semantic and JS hooks that are not meant to be styled.
+A check that cries wolf gets ignored, so this one covers only the case that
+actually broke.
+
+Both forms of jQuery element creation are detected, including the two-argument
+`$('<li>', { class: '…' })` factory. Verified by negative test: renaming the
+swatch class in the script alone now fails the audit.
 
 ## House rules preserved
 

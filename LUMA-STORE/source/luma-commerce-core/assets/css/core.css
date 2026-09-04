@@ -358,3 +358,30 @@ body.is-scrolled-product .luma-sticky-atc { transform:translateY(0); }
 @media (prefers-reduced-motion: reduce) {
     .luma-variation-swatches button, .woocommerce ul.products.is-loading { transition: none; }
 }
+
+/* ------------------------------------------------------------------------
+   Regions that are empty until AJAX fills them, and placeholders that sit
+   inside a grid. Each of these had markup but no rule, so they fell back to
+   browser defaults: the collection placeholder became a single quarter-width
+   grid cell instead of spanning the grid, and the drawer's saved-items region
+   had none of the separation its recommendations sibling has.
+   ------------------------------------------------------------------------ */
+
+.luma-collection-loading {
+    grid-column: 1 / -1;
+    padding: 45px 0;
+    color: var(--luma-muted, #77746d);
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+.luma-cart-notices:not(:empty) { margin-bottom: 16px; }
+
+.luma-cart-drawer__saved { padding: 15px 0 0; }
+.luma-cart-drawer__saved:empty { padding: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+    .luma-collection-loading { transition: none; }
+}

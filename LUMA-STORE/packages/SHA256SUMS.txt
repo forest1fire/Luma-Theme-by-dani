@@ -1,3 +1,3 @@
-a2a10934c995e779304cd5691804c9281af8f71efefafa44aa5319e0e8cacd82  luma-commerce-core.zip
+db2cb72eda9136c1fe62f87957e355f4d4905f45dddbf8928328177279980696  luma-commerce-core.zip
 ab8dff08c394dbb5d8732df89b2669cc4db9f1700d5a2d956a3f62f7c55c2587  luma-commerce-theme.zip
 10d14c61a780c88d65973cc2aea2d532eac171fd5194fc9ad4eceb7f98dd155d  luma-demo-kit.zip
