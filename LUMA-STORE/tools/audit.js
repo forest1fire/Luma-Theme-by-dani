@@ -434,6 +434,121 @@ function checkVersions() {
     return { themeVersion, pluginHeader };
 }
 
+/**
+ * WordPress and WooCommerce read compatibility data from file headers, not from
+ * the prose in a readme. A missing `Tested up to` in style.css means the theme
+ * details screen shows nothing; a missing `WC tested up to` means WooCommerce
+ * treats the extension as untested and nags on every update. Verify the headers
+ * exist, agree with each other, and agree with the readme.
+ */
+function headerValue(text, name) {
+    const m = new RegExp('^\\s*\\*?\\s*' + name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ':\\s*(.+?)\\s*$', 'im');
+    return m.test(text) ? m.exec(text)[1] : null;
+}
+
+function checkHeaders() {
+    const themeDir = path.join(SOURCE, 'luma-commerce-theme');
+    const coreDir = path.join(SOURCE, 'luma-commerce-core');
+
+    const specs = [
+        {
+            label: 'theme style.css',
+            file: path.join(themeDir, 'style.css'),
+            required: ['Theme Name', 'Version', 'Requires at least', 'Tested up to', 'Requires PHP', 'License', 'License URI', 'Text Domain'],
+        },
+        {
+            label: 'theme readme.txt',
+            file: path.join(themeDir, 'readme.txt'),
+            required: ['Stable tag', 'Tested up to', 'Requires at least', 'Requires PHP', 'License'],
+        },
+        {
+            label: 'Core plugin header',
+            file: path.join(coreDir, 'luma-commerce-core.php'),
+            required: ['Plugin Name', 'Version', 'Requires at least', 'Tested up to', 'Requires PHP', 'License', 'License URI', 'Text Domain'],
+        },
+        {
+            label: 'Core readme.txt',
+            file: path.join(coreDir, 'readme.txt'),
+            required: ['Stable tag', 'Tested up to', 'Requires at least', 'Requires PHP', 'License'],
+        },
+    ];
+
+    const texts = {};
+    for (const spec of specs) {
+        if (!fs.existsSync(spec.file)) {
+            report('error', null, `Missing metadata file: ${spec.label}`);
+            continue;
+        }
+        const text = fs.readFileSync(spec.file, 'utf8');
+        texts[spec.label] = text;
+        for (const name of spec.required) {
+            if (!headerValue(text, name)) {
+                report('error', spec.file, `${spec.label} is missing the "${name}" header`);
+            }
+        }
+    }
+
+    // Each package must not contradict itself between its header and its readme.
+    const pairs = [
+        ['theme style.css', 'theme readme.txt', 'theme'],
+        ['Core plugin header', 'Core readme.txt', 'Luma Core'],
+    ];
+    for (const [headerKey, readmeKey, label] of pairs) {
+        if (!texts[headerKey] || !texts[readmeKey]) continue;
+        for (const field of ['Tested up to', 'Requires at least', 'Requires PHP']) {
+            const a = headerValue(texts[headerKey], field);
+            const b = headerValue(texts[readmeKey], field);
+            if (a && b && a !== b) {
+                report('error', null, `${label} "${field}" disagrees: header=${a} readme=${b}`);
+            }
+        }
+    }
+
+    // A distributable readme must carry a changelog, and the version being
+    // shipped must appear in it — otherwise customers upgrading cannot tell
+    // what changed.
+    for (const [label, readmeKey, version] of [
+        ['theme', 'theme readme.txt', versions.themeVersion],
+        ['Luma Core', 'Core readme.txt', versions.pluginHeader],
+    ]) {
+        const text = texts[readmeKey];
+        if (!text) continue;
+        if (!/^==\s*Changelog\s*==\s*$/im.test(text)) {
+            report('error', null, `${label} readme.txt has no "== Changelog ==" section`);
+            continue;
+        }
+        if (version && !new RegExp('^=\\s*' + version.replace(/\./g, '\\.') + '\\s*=\\s*$', 'im').test(text)) {
+            report('error', null, `${label} readme.txt changelog has no entry for the shipping version ${version}`);
+        }
+    }
+
+    // WooCommerce compatibility is declared separately and is easy to forget.
+    // Reported as a warning because the correct value depends on real testing
+    // against a running store, which no static check can perform.
+    const corePlugin = texts['Core plugin header'];
+    if (corePlugin) {
+        const wcTested = headerValue(corePlugin, 'WC tested up to');
+        const wcRequires = headerValue(corePlugin, 'WC requires at least');
+        if (!wcTested || !wcRequires) {
+            report(
+                'warn',
+                path.join(coreDir, 'luma-commerce-core.php'),
+                'Luma Core declares no "WC tested up to" / "WC requires at least" header, so WooCommerce ' +
+                'lists it as untested and warns before every WooCommerce update. Set both after testing ' +
+                'against a live store.'
+            );
+        }
+    }
+
+    const themeTested = headerValue(texts['theme style.css'] || '', 'Tested up to');
+    const coreTested = headerValue(texts['Core plugin header'] || '', 'Tested up to');
+    if (themeTested && coreTested && themeTested !== coreTested) {
+        report('warn', null, `Theme and plugin declare different WordPress compatibility: theme=${themeTested} plugin=${coreTested}`);
+    }
+
+    return { themeTested, coreTested };
+}
+
 /* --------------------------------------------------------------------- main */
 
 phpFiles.forEach(phpSyntax);
@@ -444,7 +559,8 @@ phpFiles.forEach(checkTextDomains);
 phpFiles.forEach(checkEchoEscaping);
 checkDuplicateIds();
 checkUndefinedHelpers();
-checkVersions();
+const versions = checkVersions();
+const headers = checkHeaders();
 
 const errors = problems.filter((p) => p.level === 'error');
 const warns = problems.filter((p) => p.level === 'warn');

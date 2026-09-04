@@ -2,9 +2,11 @@
 Contributors: codewithdani
 Tags: woocommerce, sales, cart, search, wishlist, compare, conversion
 Requires at least: 6.4
+Tested up to: 6.6
 Requires PHP: 8.0
 Stable tag: 1.30.0
 License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Luma's custom WooCommerce sales engine. It is designed to keep the storefront fast and commercially useful without stacking multiple overlapping add-on plugins.
 
@@ -57,3 +59,36 @@ Wishlist, compare and recently viewed collections are device-local by default, s
 
 * Demo installer reuses matching demo products, avoids duplicate demo media and safely resolves duplicate product SKUs without taking down wp-admin.
 * v1.30.0 fixes campaign attribution that never saved (the UTM cookie was sanitized before decoding, which stripped its percent-encoding), a fatal error on the offer popup when WooCommerce was deactivated, a TypeError when the collection sync endpoint received an array, ignored product_tag filters, stale pagination after an AJAX shop refresh, and literal "\n" text on the demo Sale page. It also registers privacy exporters and erasers for restock requests and newsletter sign-ups, styles the variation swatches it injects, clears expired countdown timers, and localizes every customer-facing string the JavaScript writes.
+
+== Changelog ==
+
+= 1.30.0 =
+* Fixed UTM capture, which sanitized before decoding and accepted arbitrary parameter names.
+* Guarded the offer and size-guide popups so they no longer fatal when WooCommerce is inactive.
+* Registered Elementor widgets lazily so sites without Elementor are unaffected.
+* Fixed AJAX filtering, which ignored the requested page; requests now carry paged and a validated base URL and swap in server-rendered pagination.
+* Added a cart-availability check before reading order bumps.
+* Used correct plural forms for review and cart counts.
+* Restored product_tag filtering and made the on_sale filter work.
+* Registered privacy exporters and erasers for waitlist and lead records and contributed privacy policy content.
+* Escaped health-check output.
+* Fixed demo content writing a literal backslash-n instead of a newline.
+* Made core.js safe to include twice, removed .html() injection of server text, cleared expired countdown intervals and restored button labels after async actions.
+* Added clipboard failure handling for browsers without navigator.clipboard.
+* Made variation swatches keyboard accessible and added the stylesheet they were missing entirely.
+* Made every plugin string translatable and shipped a generated .pot template in languages/.
+* Declared Tested up to, Requires PHP and License URI in the plugin header.
+
+= 1.29.0 =
+* Added a full-height mobile filter drawer with a visible close control and a dimmed, keyboard-safe backdrop.
+* Added focus placement on the drawer close control when it opens, Escape-to-close, and aria-expanded / aria-hidden state updates.
+* Prevented page scroll while the mobile drawer is open.
+* Added applied-filter chips for category, price bounds, stock, sale and attribute selections.
+* Added individual chip removal and a Clear all action that immediately refreshes the AJAX result set.
+* Added a polite live region to the result count and applied-filter summary so refreshed results are announced.
+
+= 1.28.2 =
+* Restored the missing PHP boundary before the footer function closing brace.
+* Added a safe cart-availability check before reading the cart for the footer subtotal, preventing warnings in previews where the cart object is not initialised.
+* Clipped page-level horizontal overflow without disabling inner comparison-table scrolling.
+* Set min-width: 0 on grid children so long product names and controls cannot force the viewport wider.

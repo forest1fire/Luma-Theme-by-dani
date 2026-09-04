@@ -5,9 +5,11 @@
  * Description: Luma's custom WooCommerce sales engine: discovery, bundles, order bumps, order-aware merchandising, attribution, cart recovery foundation and conversion tools.
  * Version: 1.30.0
  * Requires at least: 6.4
+ * Tested up to: 6.6
  * Requires PHP: 8.0
  * Author: CodeWithDani
  * License: GPL-2.0-or-later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: luma-commerce-core
  */
 

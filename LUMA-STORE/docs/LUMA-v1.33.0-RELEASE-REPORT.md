@@ -73,13 +73,36 @@ repeatable quality gates rather than manual inspection.
   `wp_localize_script` instead of embedding English.
 - **Privacy policy content** contributed by both packages.
 
+## Packaging metadata
+
+Found while rebuilding the installable archives — WordPress and WooCommerce read
+compatibility data from file headers, not from readme prose:
+
+- `style.css` declared no `Tested up to`, so the theme details screen showed
+  nothing even though `readme.txt` claimed 6.6. Added, plus `License URI`.
+- The plugin header and its `readme.txt` declared no `Tested up to` at all.
+  Added to both, plus `License URI`.
+- Neither `readme.txt` had a `== Changelog ==` section, so the distributed ZIPs
+  shipped no version history. Both now carry entries for every documented
+  release, reconstructed from the reports in this folder.
+
+One gap is deliberately **not** filled: Luma Core declares no `WC tested up to`
+or `WC requires at least`. WooCommerce uses those to list an extension as
+untested and to warn before updating. Inventing a number would be a false
+compatibility claim, so the audit reports it as a standing warning instead —
+set both after testing against a live store.
+
+Note that the declared WordPress compatibility is **6.6**, which is stale:
+WordPress 7.1 shipped on 19 August 2026. Bumping it requires testing on a real
+install, which no static check can substitute for.
+
 ## Quality gates
 
 Added under `LUMA-STORE/tools/`, all wired into `.github/workflows/luma-checks.yml`:
 
 | Command | What it proves |
 | --- | --- |
-| `node tools/audit.js` | Escaping, duplicate ids, brace balance, version drift, dead code, template hierarchy |
+| `node tools/audit.js` | Escaping, duplicate ids, brace balance, version drift, header metadata, changelog presence, dead code, template hierarchy |
 | `node tools/make-pot.js --check` | `.pot` templates match the strings actually in source |
 | `node tools/smoke-test.js` | `theme.js` executes against real markup and behaves correctly |
 | `node tools/build-packages.js --check` | Shipped ZIPs match the source tree they were built from |
@@ -88,7 +111,8 @@ Added under `LUMA-STORE/tools/`, all wired into `.github/workflows/luma-checks.y
 
 ### Verified state
 
-- Static audit: **0 errors, 0 warnings** across 20 PHP, 7 CSS, 2 JS and 5 JSON files.
+- Static audit: **0 errors** across 20 PHP, 7 CSS, 2 JS and 5 JSON files, with one
+  standing warning for the undeclared WooCommerce compatibility headers.
 - Behaviour smoke test: **53 checks passed** — scheme toggle, view switcher, count
   labels, mobile menu, search panel, scroll chrome and reading progress.
 - Translation templates: 181 theme and 300 plugin entries, plural forms intact.

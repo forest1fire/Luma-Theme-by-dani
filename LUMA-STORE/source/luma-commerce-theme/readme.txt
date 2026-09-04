@@ -47,3 +47,49 @@ Elementor Pro and payment-gateway plugins require their own valid licenses/accou
 * v1.31.0 adds native Utility Menu and Footer Widgets extension points, fallback social metadata, product-review styling and print-friendly order/content surfaces.
 * v1.32.0 adds a remembered grid/list product view switcher and a more useful 404 recovery path with shop and search actions.
 * v1.33.0 fixes the duplicate WooCommerce content wrapper (two elements shared id="primary" and nested <main> landmarks), renders a heading on static pages, restores the post loop when the front page is set to latest posts, makes repeated search forms emit unique ids, corrects the luma-commerce text domain, announces bag and wish-list counts to assistive technology, and adds a light/dark color scheme, breadcrumbs with BreadcrumbList structured data, related posts, a reading progress bar and a back-to-top control.
+
+== Changelog ==
+
+= 1.33.0 =
+* Fixed duplicate element ids in searchform.php by generating a unique id per render.
+* Fixed the footer newsletter form, which posted to a missing handler and printed untranslated text.
+* Added accessible names to header actions and kept bag and wish-list labels in step with their counts.
+* Fixed the missing content wrapper in page.php, undefined variables in front-page.php and absent fallback markup in template-parts/content.php.
+* Removed duplicate animation rules shared between theme.css and seo-motion.css.
+* Fixed the mobile mega menu, which did not open, and added focus management on open and close.
+* Stopped WooCommerce printing a second #primary and a nested main element inside the theme wrapper.
+* Added a dark colour scheme with a merchant default, a visitor toggle, local persistence and an inline no-flash bootstrap.
+* Added breadcrumbs with BreadcrumbList microdata to every template.
+* Added related posts, reading progress, back-to-top and sticky-header auto-hide, each switchable in the Customizer.
+* Made every theme string translatable and shipped a generated .pot template in languages/.
+* Contributed privacy policy content.
+* Declared Tested up to, Requires PHP and License URI in the theme header so the compatibility data WordPress reads is complete.
+
+= 1.32.0 =
+* Added an optional grid/list product view switcher to the native WooCommerce archive, with grid as the default.
+* List view uses real WooCommerce product cards and persists only as a device-local preference.
+* Product filters and Core AJAX refreshes keep working because the view class stays on the product list.
+* Improved the 404 page with home, shop and search recovery actions.
+
+= 1.31.0 =
+* Added a WordPress Utility Menu location in the top utility bar, with the original Track order and Help links as a fallback.
+* Added a Footer Widgets sidebar so standard widgets can extend the footer without editing theme files.
+* Added fallback Open Graph and Twitter metadata when no SEO plugin is active; existing SEO plugins remain the source of truth.
+* Added WooCommerce product review and review-form styling.
+* Added print-friendly styles for order and content surfaces.
+
+= 1.30.0 =
+* Added a complete comments.php template with accessible author, date, moderation and reply output.
+* Added comment form support while preserving WordPress consent fields.
+* Added post author and date header, featured image, tags and post navigation.
+* Added wp_link_pages() support for paginated posts and pages.
+* Added search-result and index pagination.
+* Added responsive editorial typography for blockquote, table, media and wide alignments.
+
+= 1.29.0 =
+* Added a keyboard-accessible Skip to content link and visible :focus-visible states.
+* Improved mobile menu behaviour with outside-click close, Escape close, resize close and body scroll lock.
+* Improved search panel behaviour with outside-click close and focus return on Escape.
+* Added safer cart-count handling when WooCommerce has not initialised a cart object, including builder and preview contexts.
+* Added responsive WooCommerce styling for cart, checkout, account navigation, notices, forms and tables.
+* Added editor-content overflow protection for long text and embedded media.

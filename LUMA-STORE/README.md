@@ -26,7 +26,7 @@ cd LUMA-STORE/tools && npm ci && npm run verify
 
 | Command | What it proves |
 | --- | --- |
-| `node tools/audit.js` | Escaping, duplicate ids, brace balance, version drift, dead code, template hierarchy |
+| `node tools/audit.js` | Escaping, duplicate ids, brace balance, version drift, header metadata, changelog presence, dead code, template hierarchy |
 | `node tools/make-pot.js [--check]` | Regenerate or verify the `.pot` translation templates |
 | `node tools/smoke-test.js` | `theme.js` executes against real markup and behaves correctly |
 | `node tools/build-packages.js [--check]` | Rebuild the ZIPs, or verify they match the source tree |
