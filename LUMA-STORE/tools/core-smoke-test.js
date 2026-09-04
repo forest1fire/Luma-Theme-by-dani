@@ -100,7 +100,11 @@ function boot(options) {
 section('Load guard');
 const guarded = boot({ withCore: false });
 check('core.js does not throw when lumaCore is missing', guarded.error === null, guarded.error && guarded.error.message);
-check('it binds nothing without the localized bundle', guarded.document.querySelectorAll('.luma-variation-swatches').length === 0);
+// The preview carries static demonstration swatches, so assert on what the
+// script would have done: without the bundle the real selects stay untouched.
+check('it enhances nothing without the localized bundle',
+    guarded.document.querySelectorAll('.variations select[aria-hidden="true"]').length === 0
+    && guarded.document.querySelectorAll('.variations select[tabindex="-1"]').length === 0);
 
 /* -------------------------------------------------------------------- boot */
 
@@ -119,8 +123,14 @@ check('i18n bundle reached the script', typeof i18n === 'object' && !!i18n.addTo
 /* ------------------------------------------------------- variation swatches */
 
 section('Variation swatches (accessibility rewrite)');
-const groups = document.querySelectorAll('.luma-variation-swatches');
-check('a group is built for each variation select', groups.length === 2, groups.length);
+// The preview also carries a static demonstration of the swatch markup, so count
+// only the groups the script actually generated: one per .variations select,
+// inserted as its next element sibling.
+const variationSelects = document.querySelectorAll('.variations select');
+const generatedGroups = () => [...variationSelects].filter(
+    (sel) => sel.nextElementSibling && sel.nextElementSibling.classList.contains('luma-variation-swatches')
+).length;
+check('a group is generated for each variation select', variationSelects.length === 2 && generatedGroups() === 2, generatedGroups() + ' of ' + variationSelects.length);
 
 const sizeSelect = document.querySelector('#pa_size');
 const sizeGroup = sizeSelect.nextElementSibling;
@@ -149,7 +159,7 @@ check('the previous choice is released', buttonFor('m').getAttribute('aria-press
 check('is-selected moves with the click', buttonFor('l').classList.contains('is-selected') && !buttonFor('m').classList.contains('is-selected'));
 
 $(document.body).trigger('wc_fragment_refresh');
-check('a WooCommerce refresh does not duplicate the swatches', document.querySelectorAll('.luma-variation-swatches').length === 2, document.querySelectorAll('.luma-variation-swatches').length);
+check('a WooCommerce refresh does not duplicate the swatches', generatedGroups() === 2, generatedGroups());
 check('selection survives the re-init', document.querySelector('#pa_size').nextElementSibling.querySelectorAll('button').find((b) => b.getAttribute('data-value') === 'l').getAttribute('aria-pressed') === 'true');
 
 /* --------------------------------------------------------------- countdowns */

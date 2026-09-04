@@ -80,6 +80,9 @@ if (bootError) {
 }
 
 const docEl = document.documentElement;
+// The preview now carries demonstration markup as well as the live grid, so
+// compare against the count at boot rather than a hardcoded number.
+const productCountAtBoot = document.querySelectorAll('.product').length;
 
 section('Colour scheme toggle');
 const schemeButton = document.querySelector('[data-luma-scheme-toggle]');
@@ -193,7 +196,7 @@ check('progress is clamped at 100%', progress.style.width === '100%', progress.s
 
 section('Progressive enhancement');
 check('no script writes raw English into aria labels', !/aria-label="(Search|Bag|Account)"[^>]*data-luma-scheme/.test(document.body.outerHTML));
-check('document survives the whole run', document.querySelectorAll('.product').length === 5, document.querySelectorAll('.product').length);
+check('document survives the whole run', document.querySelectorAll('.product').length === productCountAtBoot, document.querySelectorAll('.product').length + ' vs ' + productCountAtBoot + ' at boot');
 
 console.log('\n' + '-'.repeat(58));
 if (failures.length) {

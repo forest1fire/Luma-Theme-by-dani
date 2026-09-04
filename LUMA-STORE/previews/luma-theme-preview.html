@@ -324,6 +324,34 @@
     <div class="luma-sticky-atc"><button type="button" class="luma-sticky-atc__button" data-product-id="1">Add to bag</button></div>
 </div></section>
 
+
+<section class="luma-preview-section"><div class="luma-container">
+    <h2>Runtime-generated states</h2>
+    <p class="luma-preview-lede">These elements only exist once <code>core.js</code> builds them, so no template preview ever showed them. Reproduced statically here, exactly as the script emits them, so their styles can be reviewed in both schemes. The variation select is omitted on purpose — <code>initVariationSwatches()</code> would otherwise build a second set.</p>
+
+    <h3 style="font-family:var(--luma-display);text-transform:uppercase;letter-spacing:-.02em;font-size:18px;margin:0 0 10px">Variation swatches</h3>
+    <div class="luma-variation-swatches" role="group" aria-label="Size">
+        <button type="button" data-value="s" aria-pressed="false">S</button>
+        <button type="button" data-value="m" aria-pressed="true" class="is-selected">M</button>
+        <button type="button" data-value="l" aria-pressed="false">L</button>
+        <button type="button" data-value="xl" aria-pressed="false" disabled>XL</button>
+    </div>
+
+    <h3 style="font-family:var(--luma-display);text-transform:uppercase;letter-spacing:-.02em;font-size:18px;margin:34px 0 10px">Filter empty state</h3>
+    <div class="woocommerce"><ul class="products columns-4" style="margin-bottom:0">
+        <li class="luma-filter-empty">No products found.</li>
+    </ul></div>
+
+    <h3 style="font-family:var(--luma-display);text-transform:uppercase;letter-spacing:-.02em;font-size:18px;margin:34px 0 10px">Collection loading placeholder</h3>
+    <div class="luma-collection-grid"><span class="luma-collection-loading">Loading your edit…</span></div>
+
+    <h3 style="font-family:var(--luma-display);text-transform:uppercase;letter-spacing:-.02em;font-size:18px;margin:34px 0 10px">Grid marked busy during an AJAX filter</h3>
+    <div class="woocommerce"><ul class="products columns-4 is-loading" aria-busy="true" style="margin-bottom:0">
+        <li class="product type-product"><span class="woocommerce-LoopProduct-link"><img src="../source/luma-commerce-theme/assets/images/luma-product-hoodie.jpg" alt="Looped Hoodie" loading="lazy" decoding="async"></span><h2 class="woocommerce-loop-product__title">Looped Hoodie</h2><span class="price"><span class="woocommerce-Price-amount">$44.90</span></span></li>
+        <li class="product type-product"><span class="woocommerce-LoopProduct-link"><img src="../source/luma-commerce-theme/assets/images/luma-product-overshirt.jpg" alt="Utility Overshirt" loading="lazy" decoding="async"></span><h2 class="woocommerce-loop-product__title">Utility Overshirt</h2><span class="price"><span class="woocommerce-Price-amount">$54.90</span></span></li>
+    </ul></div>
+</div></section>
+
 </main>
 
 <footer class="luma-site-footer">
