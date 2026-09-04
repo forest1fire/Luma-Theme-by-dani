@@ -886,6 +886,93 @@ function checkJsCreatedClasses() {
     return created.size;
 }
 
+
+/**
+ * Accessibility invariants that can be decided from markup alone.
+ *
+ * style.css advertises the `accessibility-ready` tag, which is a public claim,
+ * so it is worth verifying mechanically. Only rules with no legitimate
+ * exception are checked:
+ *
+ *   - every <img> carries an alt attribute (alt="" is fine for decorative);
+ *   - every <iframe> carries a title;
+ *   - a hidden honeypot field is removed from both the accessibility tree and
+ *     the tab order, because a field that is invisible but focusable traps
+ *     keyboard users and confuses screen-reader users.
+ *
+ * Labelling of ordinary form controls is deliberately not checked: a wrapping
+ * <label> is valid and common here, and deciding it correctly needs real
+ * label-association analysis. Guessing would produce noise, and the theme's
+ * controls were reviewed by hand instead.
+ */
+/**
+ * Replace PHP blocks with a placeholder containing no angle brackets.
+ *
+ * Templates interleave PHP inside attribute values, so a tag scanner that stops
+ * at the first `>` never reaches the end of the tag: an image written as
+ * `<img src="<?php … ?>" alt="…">` looks like a truncated `<img>` carrying no
+ * alt at all. Without this the accessibility checks silently parse no images
+ * and report a clean bill of health for markup they never actually saw.
+ * Newlines inside the block are preserved so reported line numbers stay right.
+ */
+function stripPhpBlocks(text) {
+    return text.replace(/<\?(?:php|=)?[\s\S]*?\?>/g, function (block) {
+        return 'lumaPhp' + block.replace(/[^\n]/g, '');
+    });
+}
+
+function htmlTagsIn(text) {
+    const out = [];
+    for (const m of text.matchAll(/<([a-zA-Z][-a-zA-Z0-9]*)((?:[^<>]*?))\/?>/g)) {
+        out.push({
+            tag: m[1].toLowerCase(),
+            attrs: m[2],
+            line: text.slice(0, m.index).split('\n').length,
+        });
+    }
+    return out;
+}
+
+function checkAccessibilityMarkup(file) {
+    if (!file.endsWith('.php')) return;
+    // PHP blocks are replaced first: their `>` characters otherwise truncate
+    // every tag they appear in, which made these checks vacuous.
+    const text = stripPhpBlocks(fs.readFileSync(file, 'utf8'));
+
+    for (const t of htmlTagsIn(text)) {
+        if (t.tag === 'img' && !/\balt\s*=/.test(t.attrs)) {
+            report('error', file, '<img> with no alt attribute. Decorative images need an explicit alt="".', t.line);
+        }
+        if (t.tag === 'iframe' && !/\btitle\s*=/.test(t.attrs)) {
+            report('error', file, '<iframe> with no title attribute.', t.line);
+        }
+        if (t.tag === 'input') {
+            const type = (/\btype\s*=\s*["']?([a-z]+)/i.exec(t.attrs) || [])[1] || 'text';
+            if (type === 'hidden') continue;
+            // A field pushed off-screen but still in the tab order or the a11y
+            // tree is worse than no field at all.
+            const offscreen = /clip|position:\s*absolute|-9999|sr-only|screen-reader/.test(t.attrs)
+                || /form-trap|honeypot/i.test(t.attrs);
+            const ariaHidden = /aria-hidden\s*=\s*(?:["']?true|["']?1)/i.test(t.attrs)
+                || /aria-hidden\s*=\s*["']?\s*(?:true|1)/i.test(t.attrs)
+                || /aria-hidden=\\?"true\\?"/i.test(t.attrs);
+            const outOfTabOrder = /tabindex\s*=\s*["']?-1/i.test(t.attrs);
+            if (offscreen || (/luma-form-trap/.test(t.attrs))) {
+                if (!/aria-hidden/.test(t.attrs)) {
+                    report('error', file, 'Honeypot field is not aria-hidden, so screen readers announce a field sighted users never see.', t.line);
+                }
+                if (!outOfTabOrder) {
+                    report('error', file, 'Honeypot field has no tabindex="-1", so keyboard users tab into an invisible field.', t.line);
+                }
+            } else if (/aria-hidden/.test(t.attrs) && !outOfTabOrder && type !== 'hidden') {
+                // aria-hidden on a focusable control is an ARIA violation:
+                // the element can receive focus while being hidden from AT.
+                report('error', file, `A focusable <input type="${type}"> is aria-hidden but still in the tab order.`, t.line);
+            }
+        }
+    }
+}
+
 /* --------------------------------------------------------------------- main */
 
 phpFiles.forEach(phpSyntax);
@@ -901,6 +988,7 @@ const headers = checkHeaders();
 checkI18nKeys();
 for (const file of phpFiles) checkWooCommerceGuards(file);
 checkJsCreatedClasses();
+phpFiles.forEach(checkAccessibilityMarkup);
 
 const errors = problems.filter((p) => p.level === 'error');
 const warns = problems.filter((p) => p.level === 'warn');

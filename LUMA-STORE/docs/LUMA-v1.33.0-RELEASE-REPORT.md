@@ -114,7 +114,7 @@ Added under `LUMA-STORE/tools/`, all wired into `.github/workflows/luma-checks.y
 
 | Command | What it proves |
 | --- | --- |
-| `node tools/audit.js` | Escaping, duplicate ids, brace balance, version drift, header metadata, changelog presence, i18n key coverage, WooCommerce guard reachability, JS-created class coverage, dead code, template hierarchy |
+| `node tools/audit.js` | Escaping, duplicate ids, brace balance, version drift, header metadata, changelog presence, i18n key coverage, WooCommerce guard reachability, JS-created class coverage, accessibility markup, dead code, template hierarchy |
 | `node tools/make-pot.js --check` | `.pot` templates match the strings actually in source |
 | `node tools/smoke-test.js` | `theme.js` executes against real markup and behaves correctly |
 | `node tools/core-smoke-test.js` | `core.js` executes on a jQuery double with AJAX intercepted |
@@ -188,6 +188,48 @@ actually broke.
 Both forms of jQuery element creation are detected, including the two-argument
 `$('<li>', { class: '…' })` factory. Verified by negative test: renaming the
 swatch class in the script alone now fails the audit.
+
+## Accessibility verification
+
+`style.css` advertises the `accessibility-ready` tag. That is a public claim, so
+it is now verified mechanically instead of assumed. The audit checks the
+invariants that have no legitimate exception:
+
+- every `<img>` carries an `alt` attribute (`alt=""` is accepted for decorative
+  images);
+- every `<iframe>` carries a `title`;
+- a honeypot field is removed from both the accessibility tree (`aria-hidden`)
+  and the tab order (`tabindex="-1"`), and no focusable control is `aria-hidden`
+  while still reachable by keyboard.
+
+Both packages pass. Every image in the theme templates has alt text, there are
+no untitled iframes, and both honeypots — the theme footer and the plugin lead
+form — are correctly hidden and unfocusable.
+
+Ordinary form-control labelling is deliberately **not** checked. A wrapping
+`<label>` is valid and used throughout, and deciding labelling correctly needs
+real association analysis; guessing produces noise that gets ignored. Those
+controls were reviewed by hand instead: all twelve are labelled by `for`/`id`, by
+a wrapping `<label>`, or are intentional honeypots. The bare checkbox in the
+admin waitlist and recovery list tables follows WordPress core's own `cb` column
+convention, where core supplies the screen-reader label.
+
+### Two checks that passed for the wrong reason
+
+The first version of the accessibility rule reported zero problems because it
+never parsed a single tag. Templates interleave PHP inside attribute values, and
+a scanner that stops at the first `>` truncates `<img src="<?php … ?>" alt="…">`
+before it ever reaches the alt. PHP blocks are now replaced with an
+angle-bracket-free placeholder before scanning, with newlines preserved so
+reported line numbers stay accurate.
+
+This was the second detector in this release that was silently blind: the pattern
+for jQuery's two-argument element factory omitted a closing angle bracket and
+matched nothing, reporting "no unstyled classes" for a case it never examined.
+
+Every rule added in this release is therefore verified by negative test — the
+check must fail when the thing it looks for is broken, and the audit must return
+to clean afterwards. A gate that cannot fail is not a gate.
 
 ## House rules preserved
 
