@@ -1,0 +1,3 @@
+<?php
+get_header();
+?><main id="primary" class="luma-main"><div class="luma-container luma-content-wrap"><?php luma_commerce_breadcrumbs(); ?><?php if ( have_posts() ) : ?><div class="luma-post-grid"><?php while ( have_posts() ) : the_post(); get_template_part( 'template-parts/content', get_post_type() ); endwhile; ?></div><div class="luma-pagination"><?php the_posts_pagination( array( 'mid_size' => 1, 'prev_text' => '← ' . esc_html__( 'Previous', 'luma-commerce' ), 'next_text' => esc_html__( 'Next', 'luma-commerce' ) . ' →' ) ); ?></div><?php else : ?><p><?php esc_html_e( 'No content found.', 'luma-commerce' ); ?></p><?php endif; ?></div></main><?php get_footer(); ?>

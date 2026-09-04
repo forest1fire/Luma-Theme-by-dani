@@ -1,0 +1,784 @@
+# Translation template for Luma.
+# Copyright (C) CodeWithDani
+# This file is distributed under the GPL-2.0-or-later license.
+msgid ""
+msgstr ""
+"Project-Id-Version: Luma\n"
+"Report-Msgid-Bugs-To: https://example.com/luma-commerce\n"
+"POT-Creation-Date: 2026-09-04T12:53+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Domain: luma-commerce\n"
+
+#: 404.php:3
+msgid "Let’s get you back to the good stuff."
+msgstr ""
+
+#: 404.php:3
+msgid "Back home"
+msgstr ""
+
+#: 404.php:3
+msgid "Shop the edit"
+msgstr ""
+
+#: archive.php:7
+#: front-page.php:23
+#: inc/core.php:542
+msgid "The journal"
+msgstr ""
+
+#: archive.php:8
+#: front-page.php:31
+#: index.php:3
+#: search.php:4
+#: single.php:25
+msgid "Previous"
+msgstr ""
+
+#: archive.php:8
+#: front-page.php:31
+#: index.php:3
+#: search.php:4
+#: single.php:25
+msgid "Next"
+msgstr ""
+
+#: archive.php:8
+msgid "Nothing here yet."
+msgstr ""
+
+#: comments.php:13
+msgid "The conversation"
+msgstr ""
+
+#: comments.php:17
+msgid "%s response"
+msgid_plural "%s responses"
+msgstr[0] ""
+msgstr[1] ""
+
+#: comments.php:42
+msgid "Comments are closed."
+msgstr ""
+
+#: footer.php:16
+msgid "Modern wardrobe pieces with a considered point of view."
+msgstr ""
+
+#: footer.php:18
+msgid "Instagram"
+msgstr ""
+
+#: footer.php:19
+msgid "Facebook"
+msgstr ""
+
+#: footer.php:20
+msgid "TikTok"
+msgstr ""
+
+#: footer.php:23
+#: inc/core.php:193
+msgid "Explore"
+msgstr ""
+
+#: footer.php:24
+msgid "Need help?"
+msgstr ""
+
+#: footer.php:26
+msgid "Contact us"
+msgstr ""
+
+#: footer.php:27
+msgid "Shipping & returns"
+msgstr ""
+
+#: footer.php:28
+msgid "Size guide"
+msgstr ""
+
+#: footer.php:29
+msgid "FAQs"
+msgstr ""
+
+#: footer.php:35
+msgid "The Luma edit"
+msgstr ""
+
+#: footer.php:35
+msgid "Sign up for first access to drops, edits, and private offers."
+msgstr ""
+
+#: footer.php:44
+msgid "Email address"
+msgstr ""
+
+#: footer.php:44
+msgid "Subscribe"
+msgstr ""
+
+#: footer.php:46
+msgid "Activate Luma Core to enable newsletter sign-up."
+msgstr ""
+
+#: footer.php:51
+msgid "Designed for WooCommerce · Built for Elementor"
+msgstr ""
+
+#: front-page.php:34
+#: index.php:3
+msgid "No content found."
+msgstr ""
+
+#: front-page.php:42
+msgid "Autumn / winter 2026"
+msgstr ""
+
+#: front-page.php:43
+msgid "Make"
+msgstr ""
+
+#: front-page.php:43
+msgid "room"
+msgstr ""
+
+#: front-page.php:43
+msgid "for more."
+msgstr ""
+
+#: front-page.php:44
+msgid "A sharper edit of everyday pieces, designed to move with you from first light to last call."
+msgstr ""
+
+#: front-page.php:45
+#: front-page.php:53
+#: front-page.php:54
+#: front-page.php:55
+msgid "Explore the edit"
+msgstr ""
+
+#: front-page.php:47
+msgid "Luma autumn winter campaign"
+msgstr ""
+
+#: front-page.php:47
+msgid "Built for"
+msgstr ""
+
+#: front-page.php:47
+msgid "everyday"
+msgstr ""
+
+#: front-page.php:47
+msgid "motion"
+msgstr ""
+
+#: front-page.php:51
+msgid "Shop by mood"
+msgstr ""
+
+#: front-page.php:51
+msgid "View all"
+msgstr ""
+
+#: front-page.php:53
+#: inc/core.php:186
+msgid "Men"
+msgstr ""
+
+#: front-page.php:54
+#: inc/core.php:186
+msgid "Women"
+msgstr ""
+
+#: front-page.php:55
+#: inc/core.php:186
+msgid "Juniors"
+msgstr ""
+
+#: front-page.php:63
+msgid "Just in"
+msgstr ""
+
+#: front-page.php:63
+#: inc/core.php:200
+msgid "Shop all"
+msgstr ""
+
+#: front-page.php:70
+msgid "View piece"
+msgstr ""
+
+#: front-page.php:70
+#. translators: %s: product name.
+msgid "Quick add %s to your bag"
+msgstr ""
+
+#: front-page.php:70
+msgid "Quick add"
+msgstr ""
+
+#: front-page.php:70
+msgid "View details"
+msgstr ""
+
+#: front-page.php:70
+msgid "Choose options"
+msgstr ""
+
+#: front-page.php:72
+msgid "Your first drop starts here"
+msgstr ""
+
+#: front-page.php:72
+msgid "Add products in WooCommerce to populate this section."
+msgstr ""
+
+#: front-page.php:72
+msgid "Add a product"
+msgstr ""
+
+#: front-page.php:79
+msgid "The Luma uniform / 01"
+msgstr ""
+
+#: front-page.php:79
+msgid "Less"
+msgstr ""
+
+#: front-page.php:79
+msgid "noise."
+msgstr ""
+
+#: front-page.php:79
+msgid "More"
+msgstr ""
+
+#: front-page.php:79
+msgid "you."
+msgstr ""
+
+#: front-page.php:79
+msgid "Quiet textures, confident proportions and the pieces you reach for on repeat."
+msgstr ""
+
+#: front-page.php:79
+msgid "Meet the uniform"
+msgstr ""
+
+#: front-page.php:79
+msgid "Luma streetwear detail"
+msgstr ""
+
+#: header.php:19
+msgid "New season, sharper essentials."
+msgstr ""
+
+#: header.php:19
+msgid "Shop now"
+msgstr ""
+
+#: header.php:22
+msgid "Luma / Streetwear for everyday motion"
+msgstr ""
+
+#: header.php:26
+msgid "Track order"
+msgstr ""
+
+#: header.php:26
+msgid "Help"
+msgstr ""
+
+#: header.php:32
+#: inc/core.php:84
+msgid "Open menu"
+msgstr ""
+
+#: header.php:36
+msgid "Primary navigation"
+msgstr ""
+
+#: header.php:41
+#: search.php:4
+#: searchform.php:32
+msgid "Search"
+msgstr ""
+
+#: header.php:42
+#: inc/core.php:516
+msgid "My account"
+msgstr ""
+
+#: header.php:42
+msgid "Account"
+msgstr ""
+
+#: header.php:43
+#: inc/core.php:94
+msgid "Wishlist"
+msgstr ""
+
+#: header.php:43
+msgid "Wish list"
+msgstr ""
+
+#: inc/core.php:115
+msgid "Explore the latest %s edit: considered pieces, easy layers and everyday essentials."
+msgstr ""
+
+#: inc/core.php:116
+msgid "%s makes considered wardrobe pieces for everyday motion, with an original streetwear point of view."
+msgstr ""
+
+#: inc/core.php:117
+#: inc/core.php:132
+msgid "Discover %s: modern wardrobe pieces with a considered point of view."
+msgstr ""
+
+#: inc/core.php:167
+msgid "Skip to content"
+msgstr ""
+
+#: inc/core.php:186
+#: inc/core.php:200
+msgid "New in"
+msgstr ""
+
+#: inc/core.php:187
+msgid "T-shirts"
+msgstr ""
+
+#: inc/core.php:187
+msgid "Outerwear"
+msgstr ""
+
+#: inc/core.php:187
+msgid "Bottoms"
+msgstr ""
+
+#: inc/core.php:187
+msgid "Accessories"
+msgstr ""
+
+#: inc/core.php:189
+#: inc/core.php:518
+msgid "Shop"
+msgstr ""
+
+#: inc/core.php:189
+msgid "Departments"
+msgstr ""
+
+#: inc/core.php:191
+msgid "Shop by product"
+msgstr ""
+
+#: inc/core.php:193
+msgid "Fresh drop"
+msgstr ""
+
+#: inc/core.php:193
+msgid "Utility layers for everyday motion."
+msgstr ""
+
+#: inc/core.php:195
+#: inc/core.php:200
+msgid "Sale"
+msgstr ""
+
+#: inc/core.php:241
+msgid "Luma Branding"
+msgstr ""
+
+#: inc/core.php:243
+msgid "Brand name"
+msgstr ""
+
+#: inc/core.php:243
+msgid "Used when no custom logo is set."
+msgstr ""
+
+#: inc/core.php:245
+msgid "Show CodeWithDani credit publicly"
+msgstr ""
+
+#: inc/core.php:249
+msgid "Instagram URL"
+msgstr ""
+
+#: inc/core.php:250
+msgid "Facebook URL"
+msgstr ""
+
+#: inc/core.php:251
+msgid "TikTok URL"
+msgstr ""
+
+#: inc/core.php:254
+msgid "Signal accent color"
+msgstr ""
+
+#: inc/core.php:254
+msgid "Paper background color"
+msgstr ""
+
+#: inc/core.php:257
+msgid "Luma Layout & UX"
+msgstr ""
+
+#: inc/core.php:259
+msgid "Container width"
+msgstr ""
+
+#: inc/core.php:261
+msgid "Corner radius"
+msgstr ""
+
+#: inc/core.php:261
+msgid "Square"
+msgstr ""
+
+#: inc/core.php:261
+msgid "Subtle"
+msgstr ""
+
+#: inc/core.php:261
+msgid "Soft"
+msgstr ""
+
+#: inc/core.php:263
+msgid "Button style"
+msgstr ""
+
+#: inc/core.php:263
+msgid "Solid"
+msgstr ""
+
+#: inc/core.php:263
+msgid "Outline"
+msgstr ""
+
+#: inc/core.php:265
+msgid "Sticky header"
+msgstr ""
+
+#: inc/core.php:267
+msgid "Announcement text"
+msgstr ""
+
+#: inc/core.php:269
+msgid "Enable motion effects"
+msgstr ""
+
+#: inc/core.php:275
+msgid "Default color scheme"
+msgstr ""
+
+#: inc/core.php:276
+msgid "Auto follows each visitor’s system preference until they choose otherwise."
+msgstr ""
+
+#: inc/core.php:28
+msgid "Primary Menu"
+msgstr ""
+
+#: inc/core.php:280
+msgid "Auto (follow system)"
+msgstr ""
+
+#: inc/core.php:281
+msgid "Light"
+msgstr ""
+
+#: inc/core.php:282
+msgid "Dark"
+msgstr ""
+
+#: inc/core.php:287
+msgid "Show a light/dark switch in the header"
+msgstr ""
+
+#: inc/core.php:288
+msgid "The visitor’s choice is remembered on their own device only."
+msgstr ""
+
+#: inc/core.php:29
+msgid "Utility Menu"
+msgstr ""
+
+#: inc/core.php:293
+msgid "Show breadcrumbs"
+msgstr ""
+
+#: inc/core.php:294
+msgid "Show related posts on articles"
+msgstr ""
+
+#: inc/core.php:295
+msgid "Show a reading progress bar on articles"
+msgstr ""
+
+#: inc/core.php:296
+msgid "Show a back-to-top control"
+msgstr ""
+
+#: inc/core.php:30
+msgid "Footer Menu"
+msgstr ""
+
+#: inc/core.php:302
+msgid "Luma WooCommerce"
+msgstr ""
+
+#: inc/core.php:304
+msgid "Product columns"
+msgstr ""
+
+#: inc/core.php:306
+msgid "Products per page"
+msgstr ""
+
+#: inc/core.php:307
+msgid "Gallery zoom"
+msgstr ""
+
+#: inc/core.php:307
+msgid "Gallery lightbox"
+msgstr ""
+
+#: inc/core.php:307
+msgid "Gallery slider"
+msgstr ""
+
+#: inc/core.php:309
+msgid "Luma Typography"
+msgstr ""
+
+#: inc/core.php:313
+msgid "Heading font"
+msgstr ""
+
+#: inc/core.php:313
+msgid "Condensed sans"
+msgstr ""
+
+#: inc/core.php:313
+#: inc/core.php:315
+msgid "Clean sans"
+msgstr ""
+
+#: inc/core.php:313
+#: inc/core.php:315
+msgid "Editorial serif"
+msgstr ""
+
+#: inc/core.php:315
+msgid "Body font"
+msgstr ""
+
+#: inc/core.php:315
+msgid "System sans"
+msgstr ""
+
+#: inc/core.php:317
+msgid "Heading scale"
+msgstr ""
+
+#: inc/core.php:319
+msgid "Body size"
+msgstr ""
+
+#: inc/core.php:34
+msgid "Footer widgets"
+msgstr ""
+
+#: inc/core.php:352
+#. translators: 1: link purpose, 2: number of items.
+msgid "%1$s, %2$d item"
+msgid_plural "%1$s, %2$d items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/core.php:36
+msgid "Optional widgets shown above the footer legal row."
+msgstr ""
+
+#: inc/core.php:365
+msgid "Bag"
+msgstr ""
+
+#: inc/core.php:379
+msgid "Your comment is awaiting moderation."
+msgstr ""
+
+#: inc/core.php:489
+msgid "Home"
+msgstr ""
+
+#: inc/core.php:512
+msgid "Shopping bag"
+msgstr ""
+
+#: inc/core.php:514
+msgid "Checkout"
+msgstr ""
+
+#: inc/core.php:538
+#. translators: 1: link purpose, 2: number of items. */ _n( '%1$s, %2$d item', '%1$s, %2$d items', $count, 'luma-commerce' ), $base, $count ); } function luma_commerce_cart_link() { $url = function_exists( 'wc_get_cart_url' ) ? wc_get_cart_url() : home_url( '/cart/' ); $count = luma_commerce_cart_count(); printf( '<a class="luma-icon-link luma-bag-link" href="%1$s" aria-label="%2$s"><span class="luma-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M5 8h14l-1 13H6L5 8Z"></path><path d="M9 8V6a3 3 0 0 1 6 0v2"></path></svg></span><span class="luma-icon-label">%3$s</span><span class="luma-cart-count" data-luma-cart-count>%4$d</span></a>', esc_url( $url ), esc_attr( luma_commerce_count_label( __( 'View shopping bag', 'luma-commerce' ), $count ) ), esc_html__( 'Bag', 'luma-commerce' ), $count ); } function luma_commerce_comment( $comment, $args, $depth ) { $tag = ( 'div' === $args['style'] ) ? 'div' : 'li'; ?> <<?php echo tag_escape( $tag ); ?> id="comment-<?php comment_ID(); ?>" <?php comment_class( 'luma-comment', $comment ); ?>> <article class="luma-comment__body"> <header class="luma-comment__meta"> <div class="luma-comment__author"><?php echo get_avatar( $comment, 48 ); ?><strong><?php echo wp_kses_post( get_comment_author_link() ); ?></strong></div> <a href="<?php echo esc_url( get_comment_link( $comment ) ); ?>"><time datetime="<?php echo esc_attr( get_comment_time( 'c' ) ); ?>"><?php echo esc_html( get_comment_date() ); ?></time></a> </header> <?php if ( '0' === (string) $comment->comment_approved ) : ?><p class="luma-comment__moderation"><?php esc_html_e( 'Your comment is awaiting moderation.', 'luma-commerce' ); ?></p><?php endif; ?> <div class="luma-comment__text"><?php comment_text(); ?></div> <div class="luma-comment__reply"><?php comment_reply_link( array_merge( $args, array( 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?></div> </article> <?php if ( 'div' !== $args['style'] ) echo '</' . tag_escape( $tag ) . '>'; } function luma_commerce_comment_reply_link( $link ) { return str_replace( 'comment-reply-link', 'comment-reply-link luma-button luma-button--small', $link ); } add_filter( 'comment_reply_link', 'luma_commerce_comment_reply_link' ); /* ========================================================================== Luma 1.33.0 — color scheme, breadcrumbs, related posts and page chrome. ========================================================================== */ /** Merchant default color scheme: light, dark or auto (follow the OS). * @return string / function luma_commerce_color_scheme() { return luma_commerce_sanitize_choice( get_theme_mod( 'luma_color_scheme', 'auto' ), array( 'auto' => 'Auto', 'light' => 'Light', 'dark' => 'Dark' ) ); } /** Expose the merchant default on <html> so the pre-paint script and CSS can agree without a flash of the wrong scheme. * @param string $output Existing language attributes. @return string / function luma_commerce_language_attributes( $output ) { return $output . ' data-luma-scheme="' . esc_attr( luma_commerce_color_scheme() ) . '"'; } add_filter( 'language_attributes', 'luma_commerce_language_attributes' ); /** Apply a stored visitor preference before first paint. * Runs in <head> so the browser never renders the light scheme and then repaints dark. Deliberately tiny and dependency-free. / function luma_commerce_scheme_bootstrap() { if ( ! get_theme_mod( 'luma_scheme_toggle', true ) ) { return; } ?> <script id="luma-scheme-bootstrap"> (function () { var root = document.documentElement; try { var stored = localStorage.getItem('lumaScheme'); if (stored === 'dark' || stored === 'light') { root.setAttribute('data-luma-theme', stored); } else if (root.getAttribute('data-luma-scheme') === 'dark') { root.setAttribute('data-luma-theme', 'dark'); } else if (root.getAttribute('data-luma-scheme') === 'light') { root.setAttribute('data-luma-theme', 'light'); } } catch (error) { /* Private browsing or blocked storage: fall back to the CSS default. */ } root.classList.add('luma-scheme-ready'); }()); </script> <?php } add_action( 'wp_head', 'luma_commerce_scheme_bootstrap', 2 ); /** Light/dark toggle. Rendered by header.php; hidden by CSS until the bootstrap script marks the document as scheme-ready, so a no-JS visitor never sees a control that cannot work. / function luma_commerce_scheme_toggle() { if ( ! get_theme_mod( 'luma_scheme_toggle', true ) ) { return; } ?> <button class="luma-scheme-toggle" type="button" data-luma-scheme-toggle aria-pressed="false" aria-label="<?php esc_attr_e( 'Switch to dark theme', 'luma-commerce' ); ?>"> <span class="luma-icon" aria-hidden="true"> <svg class="luma-scheme-icon--sun" viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="4.2"></circle><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"></path></svg> <svg class="luma-scheme-icon--moon" viewBox="0 0 24 24" focusable="false"><path d="M20 14.4A8.4 8.4 0 0 1 9.6 4a8.4 8.4 0 1 0 10.4 10.4Z"></path></svg> </span> </button> <?php } /** Breadcrumb trail for WooCommerce, posts, archives, pages and search. * Replaces the WooCommerce default breadcrumb so the markup matches the rest of the theme and carries a valid BreadcrumbList payload. * @param array $args Optional. Override `echo`. / function luma_commerce_breadcrumbs( $args = array() ) { if ( ! get_theme_mod( 'luma_show_breadcrumbs', true ) ) { return array(); } if ( is_front_page() ) { return array(); } $args = wp_parse_args( $args, array( 'echo' => true ) ); $home = array( 'label' => __( 'Home', 'luma-commerce' ), 'url' => home_url( '/' ) ); $trail = array( $home ); $current = ''; if ( function_exists( 'is_woocommerce' ) && is_woocommerce() ) { if ( is_product() ) { $terms = get_the_terms( get_the_ID(), 'product_cat' ); if ( $terms && ! is_wp_error( $terms ) ) { $term = $terms[0]; $trail[] = array( 'label' => $term->name, 'url' => get_term_link( $term ) ); } $current = get_the_title(); } elseif ( is_product_category() || is_product_tag() ) { $term = get_queried_object(); $parent_ids = $term && $term->parent ? get_ancestors( $term->term_id, $term->taxonomy, 'taxonomy' ) : array(); foreach ( array_reverse( $parent_ids ) as $parent_id ) { $parent = get_term( $parent_id, $term->taxonomy ); if ( $parent && ! is_wp_error( $parent ) ) { $trail[] = array( 'label' => $parent->name, 'url' => get_term_link( $parent ) ); } } $current = $term ? $term->name : ''; } elseif ( is_cart() ) { $current = __( 'Shopping bag', 'luma-commerce' ); } elseif ( is_checkout() ) { $current = __( 'Checkout', 'luma-commerce' ); } elseif ( is_account_page() ) { $current = __( 'My account', 'luma-commerce' ); } else { $current = __( 'Shop', 'luma-commerce' ); } } elseif ( is_singular( 'post' ) ) { $blog_id = (int) get_option( 'page_for_posts' ); if ( $blog_id ) { $trail[] = array( 'label' => get_the_title( $blog_id ), 'url' => get_permalink( $blog_id ) ); } $categories = get_the_category(); if ( $categories ) { $trail[] = array( 'label' => $categories[0]->name, 'url' => get_category_link( $categories[0] ) ); } $current = get_the_title(); } elseif ( is_page() ) { foreach ( array_reverse( get_ancestors( get_the_ID(), 'page', 'post_type' ) ) as $ancestor_id ) { $trail[] = array( 'label' => get_the_title( $ancestor_id ), 'url' => get_permalink( $ancestor_id ) ); } $current = get_the_title(); } elseif ( is_category() || is_tag() || is_tax() ) { $current = wp_strip_all_tags( get_the_archive_title() ); } elseif ( is_search() ) { $current = sprintf( /* translators: %s: search query.
+msgid "Search results for “%s”"
+msgstr ""
+
+#: inc/core.php:540
+msgid "Page not found"
+msgstr ""
+
+#: inc/core.php:559
+msgid "Breadcrumb"
+msgstr ""
+
+#: inc/core.php:646
+msgid "Keep reading"
+msgstr ""
+
+#: inc/core.php:647
+msgid "All stories"
+msgstr ""
+
+#: inc/core.php:680
+#: inc/core.php:683
+msgid "Luma theme"
+msgstr ""
+
+#: inc/core.php:681
+msgid "The Luma theme stores a colour-scheme preference and a shop grid/list preference in your browser’s local storage. Both stay on the device, are never sent to the server and can be cleared with the browser’s site data."
+msgstr ""
+
+#: inc/core.php:682
+msgid "No third-party font, analytics or advertising script is loaded by the theme."
+msgstr ""
+
+#: inc/core.php:85
+msgid "Close menu"
+msgstr ""
+
+#: inc/core.php:86
+msgid "Open search"
+msgstr ""
+
+#: inc/core.php:87
+msgid "Close search"
+msgstr ""
+
+#: inc/core.php:88
+msgid "Grid view"
+msgstr ""
+
+#: inc/core.php:89
+msgid "List view"
+msgstr ""
+
+#: inc/core.php:463
+#: inc/core.php:90
+msgid "Switch to dark theme"
+msgstr ""
+
+#: inc/core.php:91
+msgid "Switch to light theme"
+msgstr ""
+
+#: inc/core.php:670
+#: inc/core.php:92
+msgid "Back to top"
+msgstr ""
+
+#: inc/core.php:364
+#: inc/core.php:93
+msgid "View shopping bag"
+msgstr ""
+
+#: inc/core.php:95
+msgid "%d items in bag"
+msgstr ""
+
+#: inc/core.php:96
+msgid "1 item in bag"
+msgstr ""
+
+#: inc/core.php:97
+msgid "%d saved items"
+msgstr ""
+
+#: inc/core.php:98
+msgid "1 saved item"
+msgstr ""
+
+#: inc/core.php:348
+#: inc/core.php:99
+msgid "empty"
+msgstr ""
+
+#: inc/woocommerce.php:68
+#: inc/woocommerce.php:73
+msgid "Add to bag"
+msgstr ""
+
+#: page.php:34
+msgid "Page sections"
+msgstr ""
+
+#: page.php:34
+#: single.php:21
+msgid "Pages:"
+msgstr ""
+
+#: search.php:4
+msgid "Results for “%s”"
+msgstr ""
+
+#: search.php:4
+msgid "No results found. Try another search."
+msgstr ""
+
+#: searchform.php:16
+msgid "Search products, collections, stories…"
+msgstr ""
+
+#: searchform.php:19
+msgid "Search for:"
+msgstr ""
+
+#: searchform.php:33
+msgid "Search results"
+msgstr ""
+
+#: single.php:21
+msgid "Post pages"
+msgstr ""
+
+#: template-parts/content.php:26
+#. translators: %s: post title.
+msgid "Read story: %s"
+msgstr ""
+
+#: woocommerce/archive-product.php:13
+msgid "Product view"
+msgstr ""
+
+#: woocommerce/archive-product.php:13
+msgid "View"
+msgstr ""
+
+#: woocommerce/archive-product.php:13
+msgid "Grid"
+msgstr ""
+
+#: woocommerce/archive-product.php:13
+msgid "List"
+msgstr ""

@@ -1,0 +1,47 @@
+{
+  "title": "Luma Shop Intro",
+  "type": "section",
+  "version": "0.4",
+  "page_settings": [],
+  "content": [
+    {
+      "id": "lumash01",
+      "elType": "section",
+      "isInner": false,
+      "settings": {},
+      "elements": [
+        {
+          "id": "lumash01c",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 100
+          },
+          "elements": [
+            {
+              "id": "lumash02",
+              "elType": "widget",
+              "widgetType": "heading",
+              "settings": {
+                "title": "The new uniform",
+                "header_size": "h1",
+                "title_color": "#171715"
+              },
+              "elements": []
+            },
+            {
+              "id": "lumash03",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": {
+                "editor": "A sharper edit of everyday pieces. Add the WooCommerce Products widget below this section.",
+                "text_color": "#77746d"
+              },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

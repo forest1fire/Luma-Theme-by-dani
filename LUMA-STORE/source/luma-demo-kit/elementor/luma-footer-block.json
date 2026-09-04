@@ -1,0 +1,67 @@
+{
+  "title": "Luma Footer Block",
+  "type": "section",
+  "version": "0.4",
+  "page_settings": [],
+  "content": [
+    {
+      "id": "lumaf01",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#171715",
+        "padding": {
+          "unit": "px",
+          "top": "70",
+          "right": "30",
+          "bottom": "70",
+          "left": "30",
+          "isLinked": false
+        }
+      },
+      "elements": [
+        {
+          "id": "lumaf01c",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 100
+          },
+          "elements": [
+            {
+              "id": "lumaf02",
+              "elType": "widget",
+              "widgetType": "heading",
+              "settings": {
+                "title": "The Luma edit",
+                "header_size": "h2",
+                "title_color": "#ffffff"
+              },
+              "elements": []
+            },
+            {
+              "id": "lumaf03",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": {
+                "editor": "First access to drops, edits and private offers.",
+                "text_color": "#ffffff"
+              },
+              "elements": []
+            },
+            {
+              "id": "lumaf04",
+              "elType": "widget",
+              "widgetType": "shortcode",
+              "settings": {
+                "shortcode": "[luma_shipping_meter]"
+              },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

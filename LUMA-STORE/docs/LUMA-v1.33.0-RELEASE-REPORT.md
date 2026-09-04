@@ -1,0 +1,108 @@
+# Luma v1.33.0 / Luma Core v1.30.0 release report
+
+Theme **1.33.0** · Luma Core **1.30.0**. A correctness, internationalization and
+verification release: the defects found during a full audit were fixed, both
+packages were made genuinely translation-ready, and the changes are now backed by
+repeatable quality gates rather than manual inspection.
+
+## Bugs fixed — theme
+
+- `searchform.php` emitted the same `id` twice when a page rendered two search
+  forms; each field now uses `wp_unique_id()`.
+- The footer newsletter form posted to a non-existent handler and printed
+  hardcoded English. It now targets an AJAX action, is guarded by a WooCommerce
+  check, and every string is translatable.
+- Header action links carried no accessible names and the bag/wish-list counts
+  were invisible to assistive technology because `aria-label` hid the badge text.
+  The labels are now localized and kept in step with the badge by an observer.
+- `page.php` skipped the standard content wrapper, `front-page.php` referenced
+  undefined variables, and `template-parts/content.php` had no fallback markup.
+- Duplicate animation rules existed in both `theme.css` and `seo-motion.css`.
+- The mobile mega menu did not open, and focus was not managed on open or close.
+- WooCommerce printed its own `<div id="primary"><main>` inside the theme's
+  wrapper, producing two `#primary` elements and a `<main>` nested in a `<main>`.
+  `inc/woocommerce.php` now removes both wrapper actions.
+
+## Bugs fixed — Luma Core
+
+- UTM capture sanitized before decoding and accepted any parameter name; it now
+  decodes first and validates against a whitelist.
+- Offer and size-guide popups called WooCommerce functions without checking the
+  plugin was active — a fatal error on sites without it.
+- Elementor widgets registered eagerly, breaking on sites without Elementor.
+- AJAX filter requests ignored `paged`, so filtering always returned page one.
+  Requests now send `paged` and a validated `base_url`, and the response's server
+  rendered pagination replaces the stale markup.
+- Order-bump availability was not checked before use.
+- Review and cart counts used a singular string for plural quantities; `_n()` now.
+- `product_tag` filters were dropped from the tax query, and `on_sale` did nothing.
+- Privacy data was retained with no exporter, eraser or policy text. Both are now
+  registered, waitlist and lead records are hard-deleted on request, and the
+  privacy policy content is contributed to WordPress.
+- Health-check output was echoed without escaping.
+- Demo content wrote literal `\n` instead of newlines.
+
+## Bugs fixed — front-end JavaScript
+
+- `core.js` had no load guard, so a second inclusion redeclared everything.
+- Filter empty and error states injected server text with `.html()`, an XSS sink;
+  they now build text nodes only.
+- Offer countdowns kept their interval running forever after expiry.
+- Quick-add, coupon and share buttons changed their label and never restored it,
+  leaving the control stuck on "Adding…".
+- Clipboard calls had no rejection handler and failed silently on Firefox and
+  Safari, where `navigator.clipboard` can be absent.
+- Several ternaries were dead code, and every remaining aria-label was hardcoded
+  English.
+- Variation swatches were unusable by keyboard. They are now a named
+  `role="group"` with `aria-pressed` state, the hidden select is removed from the
+  accessibility tree, and swatches re-sync on WooCommerce variation events.
+- The injected `.luma-variation-swatches` markup had no stylesheet at all. The
+  missing rules are in `core.css` and use theme tokens with light-mode fallbacks.
+
+## Upgrades added
+
+- **Dark colour scheme**, end to end: a merchant default, a visitor toggle,
+  `localStorage` persistence, an inline no-flash bootstrap, and a
+  `html[data-luma-theme="dark"]` token block that overrides Customizer output.
+- **Breadcrumbs** on every template, with `BreadcrumbList` microdata.
+- **Related posts**, **reading progress**, **back-to-top**, and **sticky-header
+  auto-hide**, each individually switchable in the Customizer.
+- **Full internationalization** of both packages. 481 unique strings are wrapped
+  and ship with generated `.pot` templates; front-end scripts read their copy from
+  `wp_localize_script` instead of embedding English.
+- **Privacy policy content** contributed by both packages.
+
+## Quality gates
+
+Added under `LUMA-STORE/tools/`, all wired into `.github/workflows/luma-checks.yml`:
+
+| Command | What it proves |
+| --- | --- |
+| `node tools/audit.js` | Escaping, duplicate ids, brace balance, version drift, dead code, template hierarchy |
+| `node tools/make-pot.js --check` | `.pot` templates match the strings actually in source |
+| `node tools/smoke-test.js` | `theme.js` executes against real markup and behaves correctly |
+| `node tools/build-packages.js --check` | Shipped ZIPs match the source tree they were built from |
+
+`npm run verify` in `LUMA-STORE/tools/` runs all four.
+
+### Verified state
+
+- Static audit: **0 errors, 0 warnings** across 20 PHP, 7 CSS, 2 JS and 5 JSON files.
+- Behaviour smoke test: **53 checks passed** — scheme toggle, view switcher, count
+  labels, mobile menu, search panel, scroll chrome and reading progress.
+- Translation templates: 181 theme and 300 plugin entries, plural forms intact.
+- Package parity: theme, plugin and demo-kit digests match source.
+
+## House rules preserved
+
+- No fake sales, stock or urgency signals were introduced.
+- No tracking, no external fonts, no new runtime dependencies.
+- Privacy behaviour was strengthened, never weakened.
+- RTL, reduced-motion, Elementor and WooCommerce compatibility are intact.
+- Versions were bumped in every header, constant and readme for cache busting.
+
+## Installable packages
+
+`LUMA-STORE/packages/` holds `luma-commerce-theme.zip`, `luma-commerce-core.zip`,
+`luma-demo-kit.zip` and `SHA256SUMS.txt`.

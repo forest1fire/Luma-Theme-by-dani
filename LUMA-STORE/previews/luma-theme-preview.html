@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en" data-luma-scheme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Luma 1.33.0 — Live Theme Preview</title>
+<meta name="description" content="Static preview of the Luma theme and Luma Core plugin using their real stylesheets.">
+<!--
+  This preview links the *actual* shipped stylesheets and scripts from
+  source/luma-commerce-theme and source/luma-commerce-core, and reproduces the
+  markup those PHP templates emit, so it is a faithful way to eyeball the
+  1.33.0 / 1.30.0 changes without a WordPress install.
+  PHP-only behaviour (AJAX endpoints, WooCommerce queries) is stubbed.
+-->
+<link rel="stylesheet" href="../source/luma-commerce-theme/assets/css/theme.css">
+<link rel="stylesheet" href="../source/luma-commerce-theme/assets/css/seo-motion.css">
+<link rel="stylesheet" href="../source/luma-commerce-core/assets/css/core.css">
+<style>
+/* Preview harness only — none of this ships in the theme. */
+.luma-preview-note{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:200;background:var(--luma-ink);color:var(--luma-on-ink);font:600 10px/1.4 var(--luma-body);letter-spacing:.12em;text-transform:uppercase;padding:9px 14px;border-radius:var(--luma-radius);max-width:92vw}
+.luma-preview-note a{color:var(--luma-on-ink);text-decoration:underline}
+.luma-preview-section{padding:64px 0;border-top:1px solid var(--luma-line)}
+.luma-preview-section > .luma-container > h2{font-family:var(--luma-display);font-size:clamp(24px,3.4vw,40px);text-transform:uppercase;letter-spacing:-.05em;margin:0 0 8px}
+.luma-preview-section > .luma-container > p.luma-preview-lede{color:var(--luma-muted);font-size:13px;margin:0 0 28px;max-width:62ch}
+</style>
+<script id="luma-scheme-bootstrap">
+/* Verbatim copy of luma_commerce_scheme_bootstrap() from inc/core.php. */
+(function () {
+    var root = document.documentElement;
+    try {
+        var stored = localStorage.getItem('lumaScheme');
+        if (stored === 'dark' || stored === 'light') {
+            root.setAttribute('data-luma-theme', stored);
+        } else if (root.getAttribute('data-luma-scheme') === 'dark') {
+            root.setAttribute('data-luma-theme', 'dark');
+        } else if (root.getAttribute('data-luma-scheme') === 'light') {
+            root.setAttribute('data-luma-theme', 'light');
+        }
+    } catch (error) { /* storage blocked */ }
+    root.classList.add('luma-scheme-ready');
+}());
+</script>
+</head>
+<body class="home page-template-front-page luma-commerce luma-has-woocommerce">
+<a class="luma-skip-link" href="#primary">Skip to content</a>
+
+<div class="luma-announcement"><span>New season, sharper essentials.</span><a href="#shop">Shop now <span aria-hidden="true">↗</span></a></div>
+
+<div class="luma-utility-bar">
+    <div class="luma-container luma-utility-inner">
+        <span>Luma / Streetwear for everyday motion</span>
+        <div class="luma-utility-links"><a href="#track">Track order</a><a href="#help">Help</a></div>
+    </div>
+</div>
+
+<header class="luma-site-header luma-header--sticky">
+    <div class="luma-container luma-header-row">
+        <button class="luma-menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation"><span></span><span></span><span></span><span class="screen-reader-text">Open menu</span></button>
+        <div class="luma-branding">
+            <a class="luma-wordmark" href="#top"><span class="luma-wordmark__name">Luma<sup>®</sup></span></a>
+        </div>
+        <nav id="primary-navigation" class="luma-primary-nav" aria-label="Primary navigation">
+            <ul id="primary-menu" class="luma-menu">
+                <li class="luma-menu-mega"><a href="#shop">Shop</a><div class="luma-mega-menu"><div><small>Departments</small><a href="#men">Men</a><a href="#women">Women</a><a href="#juniors">Juniors</a><a href="#new">New in</a></div><div><small>Shop by product</small><a href="#tees">T-shirts</a><a href="#outer">Outerwear</a><a href="#bottoms">Bottoms</a><a href="#acc">Accessories</a></div><div class="luma-mega-menu__feature"><b>Fresh drop</b><span>Utility layers for everyday motion.</span><a href="#shop">Explore ↗</a></div></div></li>
+                <li><a href="#men">Men</a></li>
+                <li><a href="#women">Women</a></li>
+                <li><a href="#juniors">Juniors</a></li>
+                <li class="luma-menu-sale"><a href="#sale">Sale</a></li>
+            </ul>
+        </nav>
+        <div class="luma-header-actions">
+            <button class="luma-search-toggle luma-icon-link" type="button" aria-expanded="false" aria-controls="luma-search-panel" aria-label="Search"><span class="luma-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><circle cx="10.8" cy="10.8" r="6.5"></circle><path d="m16 16 5 5"></path></svg></span><span class="luma-icon-label">Search</span></button>
+            <a class="luma-icon-link" href="#account" aria-label="My account"><span class="luma-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="8" r="4"></circle><path d="M4.5 21c.8-4.2 3.3-6.2 7.5-6.2s6.7 2 7.5 6.2"></path></svg></span><span class="luma-icon-label">Account</span></a>
+            <a class="luma-icon-link luma-wishlist-link" href="#wishlist" aria-label="Wishlist (empty)"><span class="luma-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M20.4 4.8c-2.2-2.3-5.8-1.5-8.4 1C9.4 3.3 5.8 2.5 3.6 4.8c-2.5 2.6-1.7 6.2.6 8.8L12 21l7.8-7.4c2.3-2.6 3.1-6.2.6-8.8Z"></path></svg></span><span class="luma-icon-label">Wish list</span><span class="luma-wishlist-count" data-luma-wishlist-count aria-hidden="true">0</span></a>
+            <button class="luma-scheme-toggle" type="button" data-luma-scheme-toggle aria-pressed="false" aria-label="Switch to dark theme">
+                <span class="luma-icon" aria-hidden="true">
+                    <svg class="luma-scheme-icon--sun" viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="4.2"></circle><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"></path></svg>
+                    <svg class="luma-scheme-icon--moon" viewBox="0 0 24 24" focusable="false"><path d="M20 14.4A8.4 8.4 0 0 1 9.6 4a8.4 8.4 0 1 0 10.4 10.4Z"></path></svg>
+                </span>
+            </button>
+            <a class="luma-icon-link luma-bag-link" href="#bag" aria-label="View shopping bag, 2 items"><span class="luma-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M5 8h14l-1 13H6L5 8Z"></path><path d="M9 8V6a3 3 0 0 1 6 0v2"></path></svg></span><span class="luma-icon-label">Bag</span><span class="luma-cart-count" data-luma-cart-count>2</span></a>
+        </div>
+    </div>
+    <div id="luma-search-panel" class="luma-search-panel" hidden>
+        <div class="luma-container">
+            <form role="search" method="get" class="luma-search-form" action="#search">
+                <label class="screen-reader-text" for="luma-search-field-1">Search for:</label>
+                <input id="luma-search-field-1" class="luma-predictive-input" type="search" name="s" placeholder="Search products, collections, stories…" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="luma-predictive-results-1" aria-autocomplete="list">
+                <button type="submit">Search <span aria-hidden="true">↗</span></button>
+                <div id="luma-predictive-results-1" class="luma-predictive-results" role="listbox" aria-label="Search results" aria-live="polite"></div>
+            </form>
+        </div>
+    </div>
+</header>
+
+<main id="primary" class="luma-main luma-home">
+
+<section class="luma-home-hero">
+    <div class="luma-home-hero__copy">
+        <p class="luma-kicker">Autumn / winter 2026</p>
+        <h1>Make<br><em>room</em><br>for more.</h1>
+        <p class="luma-home-hero__intro">A sharper edit of everyday pieces, designed to move with you from first light to last call.</p>
+        <a class="luma-button" href="#shop">Explore the edit <span>↗</span></a>
+    </div>
+    <div class="luma-home-hero__visual"><img src="../source/luma-commerce-theme/assets/images/luma-hero.jpg" alt="Luma autumn winter campaign" width="1584" height="672" loading="eager" fetchpriority="high" decoding="async"><span class="luma-home-hero__stamp">Built for<br>everyday<br>motion</span></div>
+</section>
+
+<section class="luma-home-section luma-home-categories"><div class="luma-container">
+    <nav class="luma-breadcrumbs" aria-label="Breadcrumb"><ol itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a itemprop="item" href="#top"><span itemprop="name">Home</span></a><meta itemprop="position" content="1"></li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><span itemprop="name" aria-current="page">Men</span><meta itemprop="position" content="2"></li></ol></nav>
+    <div class="luma-section-heading"><h2>Shop by mood</h2><a class="luma-text-link" href="#shop">View all <span>↗</span></a></div>
+    <div class="luma-category-grid">
+        <a class="luma-category-card" style="--luma-category-image:url('../source/luma-commerce-theme/assets/images/luma-men.jpg')" href="#men"><span><strong>Men</strong><small>Explore the edit ↗</small></span></a>
+        <a class="luma-category-card" style="--luma-category-image:url('../source/luma-commerce-theme/assets/images/luma-women.jpg')" href="#women"><span><strong>Women</strong><small>Explore the edit ↗</small></span></a>
+        <a class="luma-category-card" style="--luma-category-image:url('../source/luma-commerce-theme/assets/images/luma-drop.jpg')" href="#juniors"><span><strong>Juniors</strong><small>Explore the edit ↗</small></span></a>
+    </div>
+</div></section>
+
+<div class="luma-sale-bar"><span class="luma-sale-bar__dot"></span><strong>Explore the current Luma edit</strong><span>Current offers</span><a href="#shop">Shop the edit ↗</a></div>
+
+<div class="luma-container luma-home-conversion">
+    <div class="luma-coupon-booster"><div><span class="luma-kicker">Private offer</span><strong>Use code for an extra saving</strong></div><button class="luma-apply-coupon" type="button" data-coupon="LUMA10"><span class="luma-coupon-code">LUMA10</span><span class="luma-coupon-action">Apply ↗</span></button><span class="luma-coupon-status" aria-live="polite"></span></div>
+    <div class="luma-countdown" data-end="2026-12-31T23:59:00+00:00"><span class="luma-countdown__label">Offer ends in</span><span class="luma-countdown__time"><b data-unit="days">00</b><i>d</i><b data-unit="hours">00</b><i>h</i><b data-unit="minutes">00</b><i>m</i><b data-unit="seconds">00</b><i>s</i></span></div>
+</div>
+
+<section class="luma-home-section" id="shop"><div class="luma-container">
+    <div class="luma-section-heading"><h2>Just in</h2><a class="luma-text-link" href="#shop">Shop all <span>↗</span></a></div>
+    <div class="luma-shop-view-toggle" role="group" aria-label="Product view"><span>View</span><button type="button" class="is-active" data-luma-view="grid" aria-pressed="true">Grid</button><button type="button" data-luma-view="list" aria-pressed="false">List</button></div>
+    <div class="woocommerce">
+    <ul class="products columns-4">
+        <li class="product type-product luma-product-loop-item" data-product-id="1">
+            <a class="woocommerce-LoopProduct-link woocommerce-loop-product__link" href="#p1"><span class="onsale">Sale</span><img src="../source/luma-commerce-theme/assets/images/luma-product-tee.jpg" alt="Boxy Heavyweight Tee" loading="lazy" decoding="async"></a>
+            <span class="luma-loop-signal">Only 6 left</span>
+            <h2 class="woocommerce-loop-product__title"><a href="#p1">Boxy Heavyweight Tee</a></h2>
+            <span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount">$34.90</span></del> <ins aria-hidden="true"><span class="woocommerce-Price-amount">$29.90</span></ins></span>
+            <div class="luma-loop-rating"><span aria-label="Rated 4.5 out of 5">★★★★½</span><small>12 reviews</small></div>
+            <div class="luma-loop-actions">
+                <button class="luma-wishlist-toggle" type="button" data-wishlist-id="1" aria-label="Add to wish list" aria-pressed="false">♡</button>
+                <button class="luma-compare-toggle" type="button" data-compare-id="1" aria-label="Add to compare" aria-pressed="false">Compare</button>
+                <button class="luma-quick-view" type="button" data-product-id="1">Quick view</button>
+                <button class="luma-quick-add" type="button" data-product-id="1">Quick add <span>+</span></button>
+            </div>
+        </li>
+        <li class="product type-product luma-product-loop-item" data-product-id="2">
+            <a class="woocommerce-LoopProduct-link woocommerce-loop-product__link" href="#p2"><img src="../source/luma-commerce-theme/assets/images/luma-product-overshirt.jpg" alt="Utility Overshirt" loading="lazy" decoding="async"></a>
+            <span class="luma-loop-signal">Popular</span>
+            <h2 class="woocommerce-loop-product__title"><a href="#p2">Utility Overshirt</a></h2>
+            <span class="price"><span class="woocommerce-Price-amount">$54.90</span></span>
+            <div class="luma-loop-actions">
+                <button class="luma-wishlist-toggle" type="button" data-wishlist-id="2" aria-label="Add to wish list" aria-pressed="false">♡</button>
+                <button class="luma-compare-toggle" type="button" data-compare-id="2" aria-label="Add to compare" aria-pressed="false">Compare</button>
+                <button class="luma-quick-view" type="button" data-product-id="2">Quick view</button>
+            </div>
+        </li>
+        <li class="product type-product luma-product-loop-item" data-product-id="3">
+            <a class="woocommerce-LoopProduct-link woocommerce-loop-product__link" href="#p3"><img src="../source/luma-commerce-theme/assets/images/luma-product-cargo.jpg" alt="Wide Leg Cargo" loading="lazy" decoding="async"></a>
+            <h2 class="woocommerce-loop-product__title"><a href="#p3">Wide Leg Cargo</a></h2>
+            <span class="price"><span class="woocommerce-Price-amount">$69.90</span></span>
+            <div class="luma-loop-actions">
+                <button class="luma-wishlist-toggle" type="button" data-wishlist-id="3" aria-label="Add to wish list" aria-pressed="false">♡</button>
+                <button class="luma-compare-toggle" type="button" data-compare-id="3" aria-label="Add to compare" aria-pressed="false">Compare</button>
+                <button class="luma-quick-view" type="button" data-product-id="3">Quick view</button>
+            </div>
+        </li>
+        <li class="product type-product luma-product-loop-item" data-product-id="4">
+            <a class="woocommerce-LoopProduct-link woocommerce-loop-product__link" href="#p4"><img src="../source/luma-commerce-theme/assets/images/luma-product-jacket.jpg" alt="Everyday Zip Jacket" loading="lazy" decoding="async"></a>
+            <h2 class="woocommerce-loop-product__title"><a href="#p4">Everyday Zip Jacket</a></h2>
+            <span class="price"><span class="woocommerce-Price-amount">$79.90</span></span>
+            <div class="luma-loop-actions">
+                <button class="luma-wishlist-toggle" type="button" data-wishlist-id="4" aria-label="Add to wish list" aria-pressed="false">♡</button>
+                <button class="luma-compare-toggle" type="button" data-compare-id="4" aria-label="Add to compare" aria-pressed="false">Compare</button>
+                <button class="luma-quick-view" type="button" data-product-id="4">Quick view</button>
+            </div>
+        </li>
+    </ul>
+    <nav class="woocommerce-pagination"><ul class="page-numbers"><li><span aria-current="page" class="page-numbers current">1</span></li><li><a class="page-numbers" href="#p2">2</a></li><li><a class="page-numbers" href="#p3">3</a></li><li><a class="next page-numbers" href="#p2">→</a></li></ul></nav>
+    </div>
+</div></section>
+
+<div class="luma-container luma-home-trust">
+    <div class="luma-trust-bar">
+        <div><b aria-hidden="true">↻</b><strong>Shipping &amp; returns</strong><span>See store policy</span></div>
+        <div><b aria-hidden="true">▣</b><strong>Secure checkout</strong><span>Protected connection</span></div>
+        <div><b aria-hidden="true">⌁</b><strong>Cash on delivery</strong><span>Pay on delivery</span></div>
+        <div><b aria-hidden="true">✦</b><strong>WhatsApp support</strong><span>Message the store</span></div>
+    </div>
+</div>
+
+<section class="luma-home-editorial"><div class="luma-home-editorial__copy"><p class="luma-kicker">The Luma uniform / 01</p><h2>Less<br>noise.<br>More<br>you.</h2><p>Quiet textures, confident proportions and the pieces you reach for on repeat.</p><a class="luma-button" href="#shop">Meet the uniform <span>↗</span></a></div><div class="luma-home-editorial__image"><img src="../source/luma-commerce-theme/assets/images/luma-drop.jpg" alt="Luma streetwear detail" width="768" height="1376" loading="lazy" decoding="async"></div></section>
+
+<section class="luma-preview-section"><div class="luma-container">
+    <h2>Article &amp; comments</h2>
+    <p class="luma-preview-lede">Editorial surfaces added in 1.30.0, shown here with the reading-progress bar, breadcrumbs and related-posts block from 1.33.0.</p>
+    <article class="luma-article post type-post">
+        <header class="luma-article__header">
+            <p class="luma-kicker">4 September 2026 · CodeWithDani</p>
+            <h1 class="luma-page-title">Utility, quietly reworked</h1>
+        </header>
+        <figure class="luma-article__image"><img src="../source/luma-commerce-theme/assets/images/luma-detail.jpg" alt="Luma fabric detail" loading="lazy" decoding="async"></figure>
+        <div class="luma-entry-content">
+            <p>Good utility does not shout. It sits in the weight of a cloth, the depth of a pocket and the way a seam holds after a hundred washes. This season we stripped back the hardware and let the proportions do the talking.</p>
+            <blockquote><p>The best detail is the one you stop noticing.</p></blockquote>
+            <p>Scroll this page to watch the progress bar track the article. It is throttled with requestAnimationFrame and removed entirely when the merchant disables it.</p>
+        </div>
+        <footer class="luma-article__footer"><div class="luma-article__tags"><a href="#tag">#utility</a><a href="#tag">#fabric</a></div></footer>
+    </article>
+    <div class="luma-post-navigation"><div class="nav-previous"><a href="#prev"><span class="luma-kicker">Previous</span><strong>Cut and cloth</strong></a></div><div class="nav-next"><a href="#next"><span class="luma-kicker">Next</span><strong>Layering notes</strong></a></div></div>
+    <section class="luma-related" aria-labelledby="luma-related-title">
+        <div class="luma-related__heading"><h2 id="luma-related-title">Keep reading</h2><a class="luma-text-link" href="#journal">All stories <span aria-hidden="true">↗</span></a></div>
+        <div class="luma-post-grid">
+            <article class="luma-post-card post"><a class="luma-post-card__image" href="#s1" tabindex="-1" aria-hidden="true"><img src="../source/luma-commerce-theme/assets/images/luma-about.jpg" alt="" loading="lazy" decoding="async"></a><div class="luma-post-card__body"><p class="luma-kicker"><time datetime="2026-08-21">21 August 2026</time></p><h2 class="luma-post-card__title"><a href="#s1">Cut and cloth</a></h2><p class="luma-post-card__excerpt">How a relaxed shoulder changes the way a jacket moves through a day.</p><a class="luma-text-link" href="#s1">Read story: Cut and cloth <span aria-hidden="true">↗</span></a></div></article>
+            <article class="luma-post-card post"><a class="luma-post-card__image" href="#s2" tabindex="-1" aria-hidden="true"><img src="../source/luma-commerce-theme/assets/images/luma-contact.jpg" alt="" loading="lazy" decoding="async"></a><div class="luma-post-card__body"><p class="luma-kicker"><time datetime="2026-08-14">14 August 2026</time></p><h2 class="luma-post-card__title"><a href="#s2">Layering notes</a></h2><p class="luma-post-card__excerpt">Three pieces that work from first light to last call without a change.</p><a class="luma-text-link" href="#s2">Read story: Layering notes <span aria-hidden="true">↗</span></a></div></article>
+            <article class="luma-post-card post"><a class="luma-post-card__image" href="#s3" tabindex="-1" aria-hidden="true"><span class="luma-image-placeholder"></span></a><div class="luma-post-card__body"><p class="luma-kicker"><time datetime="2026-08-02">2 August 2026</time></p><h2 class="luma-post-card__title"><a href="#s3">Studio notes</a></h2><p class="luma-post-card__excerpt">What we kept, what we cut, and why the hardware went quiet.</p><a class="luma-text-link" href="#s3">Read story: Studio notes <span aria-hidden="true">↗</span></a></div></article>
+        </div>
+    </section>
+</div></section>
+
+</main>
+
+<footer class="luma-site-footer">
+    <div class="luma-container">
+        <div class="luma-footer-grid">
+            <div class="luma-footer-brand">
+                <a class="luma-wordmark luma-wordmark--footer" href="#top"><span class="luma-wordmark__name">Luma<sup>®</sup></span></a>
+                <p>Modern wardrobe pieces with a considered point of view.</p>
+                <div class="luma-socials"><a href="#ig" aria-label="Instagram" target="_blank" rel="noopener noreferrer">ig</a><a href="#fb" aria-label="Facebook" target="_blank" rel="noopener noreferrer">fb</a><a href="#tk" aria-label="TikTok" target="_blank" rel="noopener noreferrer">tk</a></div>
+            </div>
+            <div><h2>Explore</h2><ul class="luma-footer-menu"><li><a href="#shop">Shop all</a></li><li><a href="#new">New in</a></li><li><a href="#sale">Sale</a></li></ul></div>
+            <div><h2>Need help?</h2><ul class="luma-footer-menu"><li><a href="#contact">Contact us</a></li><li><a href="#ship">Shipping &amp; returns</a></li><li><a href="#size">Size guide</a></li><li><a href="#faq">FAQs</a></li></ul></div>
+            <div class="luma-footer-newsletter"><h2>The Luma edit</h2><p>Sign up for first access to drops, edits, and private offers.</p><form class="luma-newsletter-form" action="#ajax" method="post" data-luma-lead><label class="screen-reader-text" for="luma-email-1">Email address</label><input id="luma-email-1" type="email" name="email" placeholder="Email address" autocomplete="email" required><input class="luma-form-trap" type="text" name="luma_website" tabindex="-1" autocomplete="off" aria-hidden="true"><button type="submit" aria-label="Subscribe">↗</button><span class="luma-lead-status" aria-live="polite"></span></form></div>
+        </div>
+        <div class="luma-footer-widgets">
+            <section id="text-1" class="luma-footer-widget widget_text"><h2 class="luma-footer-widget__title">Store hours</h2><div class="textwidget"><p>Monday–Saturday<br>10:00–18:00</p></div></section>
+            <section id="text-2" class="luma-footer-widget widget_text"><h2 class="luma-footer-widget__title">Customer care</h2><div class="textwidget"><p>Orders, fit advice and exchanges, answered within one business day.</p></div></section>
+            <section id="text-3" class="luma-footer-widget widget_text"><h2 class="luma-footer-widget__title">Payments</h2><div class="textwidget"><p>Card, wallet and cash on delivery where available.</p></div></section>
+        </div>
+        <div class="luma-footer-bottom"><span>© 2026 Luma</span><span>Designed for WooCommerce · Built for Elementor</span></div>
+    </div>
+</footer>
+
+<div class="luma-cart-drawer" id="luma-cart-drawer" aria-hidden="true"><div class="luma-cart-drawer__backdrop"></div><aside class="luma-cart-drawer__panel" role="dialog" aria-modal="true" aria-label="Shopping bag"><div class="luma-cart-drawer__header"><span class="luma-kicker">Your edit</span><button class="luma-cart-drawer__close" type="button" aria-label="Close">×</button><h2>Your bag</h2></div><div class="luma-cart-drawer__body"><div class="luma-cart-notices" data-cart-notices aria-live="polite"></div><div data-cart-body><ul class="luma-mini-cart"><li data-cart-key="k1"><a class="luma-mini-cart__image" href="#p1"><img src="../source/luma-commerce-theme/assets/images/luma-product-tee.jpg" alt="" loading="lazy"></a><div class="luma-mini-cart__info"><a class="luma-mini-cart__name" href="#p1">Boxy Heavyweight Tee</a><span class="luma-mini-cart__meta">Size: M</span><strong>$29.90</strong><button type="button" class="luma-save-for-later" data-cart-key="k1">Save for later</button><div class="luma-mini-cart__controls"><button type="button" data-cart-action="minus" aria-label="Decrease quantity">−</button><span>1</span><button type="button" data-cart-action="plus" aria-label="Increase quantity">+</button><button type="button" class="luma-mini-cart__remove" data-cart-action="remove">Remove</button></div></div></li></ul></div><div class="luma-cart-drawer__meter" data-cart-meter><div class="luma-shipping-meter"><div class="luma-shipping-meter__copy"><span>You are $20.00 away from free delivery</span><strong>$49.99</strong></div><div class="luma-shipping-meter__track"><span style="width:60%"></span></div></div></div><div class="luma-cart-drawer__recommendations" data-cart-recommendations></div><div class="luma-cart-drawer__saved" data-cart-saved></div></div><div class="luma-cart-drawer__footer"><div><span>Subtotal</span><strong data-cart-subtotal>$29.90</strong></div><a class="luma-button" href="#bag">View bag <span>↗</span></a><a class="luma-drawer-checkout" href="#checkout">Checkout <span>↗</span></a></div></aside></div>
+
+<div class="luma-compare-tray" aria-live="polite"><span><strong data-compare-count>0</strong> items ready to compare</span><a href="#compare">Compare now ↗</a></div>
+
+<a class="luma-to-top" href="#top" data-luma-to-top aria-label="Back to top"><span aria-hidden="true">↑</span></a>
+<div class="luma-reading-progress" aria-hidden="true"><span class="luma-reading-progress__bar" data-luma-progress></span></div>
+
+<p class="luma-preview-note">Static preview · real stylesheets · <a href="../packages/">download packages</a></p>
+
+<script>
+/* Stubs for the objects WordPress injects via wp_localize_script(). */
+window.lumaTheme = {
+    cartUrl: '#bag', shopUrl: '#shop', scheme: 'auto', schemeToggle: true,
+    i18n: {
+        openMenu: 'Open menu', closeMenu: 'Close menu', openSearch: 'Search', closeSearch: 'Close search',
+        gridView: 'Grid view', listView: 'List view', darkMode: 'Switch to dark theme', lightMode: 'Switch to light theme',
+        toTop: 'Back to top', viewBag: 'View shopping bag', viewWishlist: 'Wishlist',
+        itemsInBag: '%d items in bag', oneItemInBag: '1 item in bag',
+        itemsSaved: '%d saved items', oneItemSaved: '1 saved item', noItems: 'empty'
+    }
+};
+</script>
+<script src="../source/luma-commerce-theme/assets/js/theme.js"></script>
+<script>
+/* The bag badge starts at 2 in this preview; show that the accessible label
+   tracks it by toggling the number every few seconds. */
+(function () {
+    var badge = document.querySelector('[data-luma-cart-count]');
+    if (!badge) return;
+    var counts = [2, 0, 1, 5];
+    var i = 0;
+    window.setInterval(function () {
+        i = (i + 1) % counts.length;
+        badge.textContent = String(counts[i]);
+    }, 4000);
+}());
+</script>
+</body>
+</html>

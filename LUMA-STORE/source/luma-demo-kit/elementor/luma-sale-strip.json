@@ -1,0 +1,46 @@
+{
+  "title": "Luma Sale Strip",
+  "type": "section",
+  "version": "0.4",
+  "page_settings": [],
+  "content": [
+    {
+      "id": "lumas01",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#171715",
+        "padding": {
+          "unit": "px",
+          "top": "70",
+          "right": "30",
+          "bottom": "70",
+          "left": "30",
+          "isLinked": false
+        }
+      },
+      "elements": [
+        {
+          "id": "lumas01c",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 100
+          },
+          "elements": [
+            {
+              "id": "lumas02",
+              "elType": "widget",
+              "widgetType": "shortcode",
+              "settings": {
+                "shortcode": "[luma_sale_bar]"
+              },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

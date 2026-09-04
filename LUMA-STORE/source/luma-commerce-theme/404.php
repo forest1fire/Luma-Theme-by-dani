@@ -1,0 +1,3 @@
+<?php
+get_header();
+?><main id="primary" class="luma-main"><div class="luma-container luma-404"><?php luma_commerce_breadcrumbs(); ?><p class="luma-kicker">404</p><h1 class="luma-page-title">That page took a wrong turn.</h1><p><?php esc_html_e( 'Let’s get you back to the good stuff.', 'luma-commerce' ); ?></p><div class="luma-404__actions"><a class="luma-button" href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Back home', 'luma-commerce' ); ?> <span>↗</span></a><a class="luma-text-link" href="<?php echo esc_url( luma_commerce_shop_url() ); ?>"><?php esc_html_e( 'Shop the edit', 'luma-commerce' ); ?> <span>↗</span></a></div><div class="luma-404__search"><?php get_search_form(); ?></div></div></main><?php get_footer(); ?>

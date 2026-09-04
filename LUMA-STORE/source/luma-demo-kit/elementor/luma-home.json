@@ -1,0 +1,177 @@
+{
+  "title": "Luma Home Starter",
+  "type": "page",
+  "version": "0.4",
+  "page_settings": [],
+  "content": [
+    {
+      "id": "lumahe01",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#171715",
+        "padding": {
+          "unit": "px",
+          "top": "70",
+          "right": "30",
+          "bottom": "70",
+          "left": "30",
+          "isLinked": false
+        }
+      },
+      "elements": [
+        {
+          "id": "lumahe01c",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 100
+          },
+          "elements": [
+            {
+              "id": "lumaheh1",
+              "elType": "widget",
+              "widgetType": "heading",
+              "settings": {
+                "title": "Make room for more.",
+                "header_size": "h1",
+                "title_color": "#ffffff"
+              },
+              "elements": []
+            },
+            {
+              "id": "lumahp1",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": {
+                "editor": "A bold starting point for the Luma streetwear storefront. Replace this copy, add your campaign image and change every colour in Elementor.",
+                "text_color": "#ffffff"
+              },
+              "elements": []
+            },
+            {
+              "id": "lumaheb1",
+              "elType": "widget",
+              "widgetType": "button",
+              "settings": {
+                "text": "Explore the edit",
+                "link": {
+                  "url": "/shop/"
+                },
+                "button_text_color": "#ffffff",
+                "background_color": "#171715",
+                "align": "left"
+              },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lumahe02",
+      "elType": "section",
+      "isInner": false,
+      "settings": {},
+      "elements": [
+        {
+          "id": "lumahe02c",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 100
+          },
+          "elements": [
+            {
+              "id": "lumaheh2",
+              "elType": "widget",
+              "widgetType": "heading",
+              "settings": {
+                "title": "Build your edit",
+                "header_size": "h2",
+                "title_color": "#171715"
+              },
+              "elements": []
+            },
+            {
+              "id": "lumahp2",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": {
+                "editor": "Use WooCommerce Products, Categories and Image widgets here. This starter section is fully editable in Elementor.",
+                "text_color": "#77746d"
+              },
+              "elements": []
+            },
+            {
+              "id": "lumahs1",
+              "elType": "widget",
+              "widgetType": "shortcode",
+              "settings": {
+                "shortcode": "[products limit=\"8\" columns=\"4\" orderby=\"date\"]"
+              },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lumahe03",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#f0523d",
+        "padding": {
+          "unit": "px",
+          "top": "70",
+          "right": "30",
+          "bottom": "70",
+          "left": "30",
+          "isLinked": false
+        }
+      },
+      "elements": [
+        {
+          "id": "lumahe03c",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 100
+          },
+          "elements": [
+            {
+              "id": "lumacp1",
+              "elType": "widget",
+              "widgetType": "shortcode",
+              "settings": {
+                "shortcode": "[luma_sale_bar]"
+              },
+              "elements": []
+            },
+            {
+              "id": "lumacp2",
+              "elType": "widget",
+              "widgetType": "shortcode",
+              "settings": {
+                "shortcode": "[luma_coupon]"
+              },
+              "elements": []
+            },
+            {
+              "id": "lumacp3",
+              "elType": "widget",
+              "widgetType": "shortcode",
+              "settings": {
+                "shortcode": "[luma_countdown]"
+              },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

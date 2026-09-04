@@ -1,0 +1,13 @@
+Type,SKU,Name,Published,Is featured?,Visibility in catalog,Short description,Description,Regular price,Sale price,In stock?,Stock,Categories
+variable,LUMA-DEMO-001,Utility Overshirt,1,1,visible,A dummy Luma utility layer.,Demo content — replace with your own copy.,5490,,1,25,Men > Outerwear
+simple,LUMA-DEMO-002,Boxy Heavyweight Tee,1,1,visible,A dummy Luma everyday tee.,Demo content — replace with your own copy.,3490,2990,1,25,Men > T-shirts
+simple,LUMA-DEMO-003,Wide Leg Cargo,1,0,visible,A dummy Luma cargo trouser.,Demo content — replace with your own copy.,6990,,1,25,Men > Bottoms
+variable,LUMA-DEMO-004,Everyday Zip Jacket,1,1,visible,A dummy Luma utility jacket.,Demo content — replace with your own copy.,7990,,1,25,Women > Outerwear
+simple,LUMA-DEMO-005,Cropped Utility Tee,1,0,visible,A dummy Luma cropped tee.,Demo content — replace with your own copy.,2990,2490,1,25,Women > T-shirts
+simple,LUMA-DEMO-006,Relaxed Carpenter Pant,1,0,visible,A dummy Luma relaxed pant.,Demo content — replace with your own copy.,5990,,1,25,Women > Bottoms
+variable,LUMA-DEMO-007,Signal Graphic Tee,1,1,visible,A dummy Luma graphic tee.,Demo content — replace with your own copy.,2490,,1,25,Juniors > T-shirts
+simple,LUMA-DEMO-008,Track Shell,1,0,visible,A dummy Luma shell jacket.,Demo content — replace with your own copy.,6490,,1,25,Juniors > Outerwear
+simple,LUMA-DEMO-009,Low Profile Cap,1,0,visible,A dummy Luma cap.,Demo content — replace with your own copy.,1990,,1,25,New In > Accessories
+simple,LUMA-DEMO-010,Canvas Crossbody,1,0,visible,A dummy Luma crossbody bag.,Demo content — replace with your own copy.,2990,,1,25,New In > Accessories
+simple,LUMA-DEMO-011,Contrast Sweatshirt,1,0,visible,A dummy Luma sweatshirt.,Demo content — replace with your own copy.,4990,3990,1,25,Sale > T-shirts
+simple,LUMA-DEMO-012,Night Shift Hoodie,1,0,visible,A dummy Luma hoodie.,Demo content — replace with your own copy.,5990,4490,1,25,Sale > Outerwear

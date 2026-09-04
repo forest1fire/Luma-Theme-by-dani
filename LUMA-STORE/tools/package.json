@@ -1,0 +1,20 @@
+{
+  "name": "luma-workspace-tools",
+  "version": "1.1.0",
+  "private": true,
+  "description": "Static audit, translation, packaging and behaviour tooling for the Luma workspace.",
+  "scripts": {
+    "audit": "node audit.js",
+    "pot": "node make-pot.js",
+    "pot:check": "node make-pot.js --check",
+    "smoke": "node smoke-test.js",
+    "build": "node build-packages.js",
+    "packages:check": "node build-packages.js --check",
+    "verify": "node audit.js && node make-pot.js --check && node smoke-test.js && node build-packages.js --check",
+    "check": "npm run verify"
+  },
+  "devDependencies": {
+    "css-tree": "^3.1.0",
+    "php-parser": "^3.2.2"
+  }
+}

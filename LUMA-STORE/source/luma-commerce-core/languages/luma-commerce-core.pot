@@ -1,0 +1,1315 @@
+# Translation template for Luma Core.
+# Copyright (C) CodeWithDani
+# This file is distributed under the GPL-2.0-or-later license.
+msgid ""
+msgstr ""
+"Project-Id-Version: Luma Core\n"
+"Report-Msgid-Bugs-To: https://example.com/luma-commerce\n"
+"POT-Creation-Date: 2026-09-04T12:53+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Domain: luma-commerce-core\n"
+
+#: includes/post-purchase.php:41
+msgid "After the order"
+msgstr ""
+
+#: includes/post-purchase.php:41
+msgid "Complete your rotation"
+msgstr ""
+
+#: includes/post-purchase.php:41
+msgid "A considered follow-up to the pieces in this order, selected from your store catalogue."
+msgstr ""
+
+#: includes/post-purchase.php:49
+msgid "Add again"
+msgstr ""
+
+#: includes/post-purchase.php:49
+msgid "View item"
+msgstr ""
+
+#: includes/post-purchase.php:62
+msgid "From your order"
+msgstr ""
+
+#: includes/post-purchase.php:62
+msgid "Shop it again"
+msgstr ""
+
+#: includes/post-purchase.php:62
+msgid "Revisit the pieces from this order or add an available item back to your bag."
+msgstr ""
+
+#: luma-commerce-core.php:100
+msgid "Remove from wish list"
+msgstr ""
+
+#: luma-commerce-core.php:101
+#: luma-commerce-core.php:596
+#: luma-commerce-core.php:617
+#: luma-commerce-core.php:870
+msgid "Add to compare"
+msgstr ""
+
+#: luma-commerce-core.php:102
+#: luma-commerce-core.php:1400
+msgid "Remove from compare"
+msgstr ""
+
+#: luma-commerce-core.php:103
+msgid "Added"
+msgstr ""
+
+#: luma-commerce-core.php:104
+msgid "Applied"
+msgstr ""
+
+#: luma-commerce-core.php:105
+msgid "Copied"
+msgstr ""
+
+#: luma-commerce-core.php:106
+msgid "Checking…"
+msgstr ""
+
+#: luma-commerce-core.php:1064
+#: luma-commerce-core.php:1066
+#: luma-commerce-core.php:1076
+msgid "Luma saved items"
+msgstr ""
+
+#: luma-commerce-core.php:1064
+msgid "Saved products and quantities"
+msgstr ""
+
+#: luma-commerce-core.php:107
+msgid "Saving…"
+msgstr ""
+
+#: luma-commerce-core.php:108
+msgid "Adding…"
+msgstr ""
+
+#: luma-commerce-core.php:109
+msgid "Removing…"
+msgstr ""
+
+#: luma-commerce-core.php:1090
+msgid "Restock request"
+msgstr ""
+
+#: luma-commerce-core.php:1094
+msgid "Newsletter sign-up"
+msgstr ""
+
+#: luma-commerce-core.php:110
+msgid "Adding the edit…"
+msgstr ""
+
+#: luma-commerce-core.php:111
+msgid "Please try again."
+msgstr ""
+
+#: luma-commerce-core.php:1115
+msgid "Recorded"
+msgstr ""
+
+#: luma-commerce-core.php:112
+msgid "Compare up to four pieces at a time."
+msgstr ""
+
+#: luma-commerce-core.php:1120
+msgid "Notified"
+msgstr ""
+
+#: luma-commerce-core.php:1123
+msgid "Offer stored"
+msgstr ""
+
+#: luma-commerce-core.php:113
+msgid "Select at least one piece."
+msgstr ""
+
+#: luma-commerce-core.php:114
+#: luma-commerce-core.php:1431
+#: luma-commerce-core.php:1435
+#: luma-commerce-core.php:1438
+msgid "Nothing saved here yet."
+msgstr ""
+
+#: luma-commerce-core.php:115
+msgid "This item could not be saved."
+msgstr ""
+
+#: luma-commerce-core.php:1155
+#: luma-commerce-core.php:1162
+msgid "Luma restock requests and newsletter sign-ups"
+msgstr ""
+
+#: luma-commerce-core.php:116
+msgid "This saved item could not be updated."
+msgstr ""
+
+#: luma-commerce-core.php:117
+msgid "We could not find that order."
+msgstr ""
+
+#: luma-commerce-core.php:1173
+#: luma-commerce-core.php:1180
+msgid "Luma Core"
+msgstr ""
+
+#: luma-commerce-core.php:1175
+msgid "Restock requests store the email address and product a visitor asked about, so they can be notified when it returns. Entries are deleted after the notification is sent or on request."
+msgstr ""
+
+#: luma-commerce-core.php:1176
+msgid "Newsletter sign-ups store the email address and any offer code shown at the time of sign-up. A hidden honeypot field rejects automated submissions."
+msgstr ""
+
+#: luma-commerce-core.php:1177
+msgid "Saved-for-later items are kept in the WooCommerce session for guests and in user meta for signed-in customers. They contain product references only."
+msgstr ""
+
+#: luma-commerce-core.php:1178
+msgid "Campaign measurement is off by default. When a merchant enables it, only UTM source, medium, campaign and content are stored, and only after the visitor accepts in the on-site notice."
+msgstr ""
+
+#: luma-commerce-core.php:118
+msgid "Take a look at this piece."
+msgstr ""
+
+#: luma-commerce-core.php:1188
+msgid "Keep it close"
+msgstr ""
+
+#: luma-commerce-core.php:1188
+msgid "Saved for later"
+msgstr ""
+
+#: luma-commerce-core.php:119
+#: luma-commerce-core.php:587
+#: luma-commerce-core.php:951
+#: luma-commerce-core.php:972
+msgid "Close"
+msgstr ""
+
+#: luma-commerce-core.php:1196
+msgid "Saved product unavailable"
+msgstr ""
+
+#: luma-commerce-core.php:120
+msgid "%d pieces"
+msgstr ""
+
+#: luma-commerce-core.php:1201
+msgid "Move to bag"
+msgstr ""
+
+#: luma-commerce-core.php:1201
+#: luma-commerce-core.php:1230
+#: luma-commerce-core.php:1412
+#: luma-commerce-core.php:1459
+msgid "View piece"
+msgstr ""
+
+#: luma-commerce-core.php:1202
+msgid "Quantity: %d"
+msgstr ""
+
+#: luma-commerce-core.php:121
+msgid "Page %d"
+msgstr ""
+
+#: luma-commerce-core.php:122
+msgid "Choose an option"
+msgstr ""
+
+#: luma-commerce-core.php:1259
+#: luma-commerce-core.php:1272
+msgid "Cart item not found."
+msgstr ""
+
+#: luma-commerce-core.php:1275
+msgid "This item is unavailable."
+msgstr ""
+
+#: luma-commerce-core.php:1289
+msgid "Saved for later."
+msgstr ""
+
+#: luma-commerce-core.php:1303
+#: luma-commerce-core.php:1328
+msgid "Saved item not found."
+msgstr ""
+
+#: luma-commerce-core.php:1309
+msgid "This saved piece is no longer available."
+msgstr ""
+
+#: luma-commerce-core.php:1311
+msgid "This saved piece could not be added."
+msgstr ""
+
+#: luma-commerce-core.php:1313
+msgid "Moved back to your bag."
+msgstr ""
+
+#: luma-commerce-core.php:1320
+msgid "Saved items are unavailable."
+msgstr ""
+
+#: luma-commerce-core.php:1330
+msgid "Removed from saved items."
+msgstr ""
+
+#: luma-commerce-core.php:1337
+msgid "Quick view is disabled."
+msgstr ""
+
+#: luma-commerce-core.php:1339
+msgid "Product not found."
+msgstr ""
+
+#: luma-commerce-core.php:1341
+msgid "Quick look"
+msgstr ""
+
+#: luma-commerce-core.php:1341
+msgid "View product"
+msgstr ""
+
+#: luma-commerce-core.php:1351
+msgid "Enter a coupon code."
+msgstr ""
+
+#: luma-commerce-core.php:1353
+msgid "Offer applied to your bag."
+msgstr ""
+
+#: luma-commerce-core.php:1354
+msgid "This offer is not available for the current bag."
+msgstr ""
+
+#: luma-commerce-core.php:1380
+#: luma-commerce-core.php:1411
+msgid "Sold out"
+msgstr ""
+
+#: luma-commerce-core.php:1383
+msgid "View all results"
+msgstr ""
+
+#: luma-commerce-core.php:1399
+msgid "Compare pieces"
+msgstr ""
+
+#: luma-commerce-core.php:1402
+msgid "Price"
+msgstr ""
+
+#: luma-commerce-core.php:1402
+msgid "Reviews"
+msgstr ""
+
+#: luma-commerce-core.php:1402
+msgid "Availability"
+msgstr ""
+
+#: luma-commerce-core.php:1404
+msgid "Action"
+msgstr ""
+
+#: luma-commerce-core.php:1410
+msgid "No reviews yet"
+msgstr ""
+
+#: luma-commerce-core.php:1427
+msgid "The shop is unavailable."
+msgstr ""
+
+#: luma-commerce-core.php:1445
+msgid "Login required."
+msgstr ""
+
+#: luma-commerce-core.php:1446
+#: luma-commerce-core.php:1448
+msgid "Invalid collection."
+msgstr ""
+
+#: luma-commerce-core.php:1459
+msgid "Quick add %s"
+msgstr ""
+
+#: luma-commerce-core.php:1491
+msgid "%d customer review"
+msgid_plural "%d customer reviews"
+msgstr[0] ""
+msgstr[1] ""
+
+#: luma-commerce-core.php:1514
+msgid "Styled together"
+msgstr ""
+
+#: luma-commerce-core.php:1517
+msgid "Add all to bag"
+msgstr ""
+
+#: luma-commerce-core.php:1528
+msgid "Bundles are unavailable."
+msgstr ""
+
+#: luma-commerce-core.php:1538
+msgid "Choose an available piece to add."
+msgstr ""
+
+#: luma-commerce-core.php:1540
+msgid "%d piece added to your bag."
+msgid_plural "%d pieces added to your bag."
+msgstr[0] ""
+msgstr[1] ""
+
+#: luma-commerce-core.php:1574
+msgid "This add-on is unavailable."
+msgstr ""
+
+#: luma-commerce-core.php:1575
+msgid "Could not add the add-on."
+msgstr ""
+
+#: luma-commerce-core.php:1825
+msgid "The demo installer stopped safely. Check the PHP error log for the exact cause."
+msgstr ""
+
+#: luma-commerce-core.php:1843
+msgid "Order tracking is unavailable."
+msgstr ""
+
+#: luma-commerce-core.php:1847
+msgid "We could not match that order. Check the order number and email."
+msgstr ""
+
+#: luma-commerce-core.php:1848
+#. translators: 1: order number, 2: order status.
+msgid "Order %1$s is %2$s."
+msgstr ""
+
+#: luma-commerce-core.php:1859
+#: luma-commerce-core.php:1891
+#: luma-commerce-core.php:1894
+msgid "Please enter a valid email address."
+msgstr ""
+
+#: luma-commerce-core.php:1860
+msgid "This piece is unavailable."
+msgstr ""
+
+#: luma-commerce-core.php:1861
+msgid "This piece is available now."
+msgstr ""
+
+#: luma-commerce-core.php:1866
+msgid "We could not save that request. Please try again."
+msgstr ""
+
+#: luma-commerce-core.php:1868
+msgid "You are on the list. We will be in touch when it returns."
+msgstr ""
+
+#: luma-commerce-core.php:1883
+msgid "%s is back in stock"
+msgstr ""
+
+#: luma-commerce-core.php:1883
+msgid "%s is available again. Shop it here: %s"
+msgstr ""
+
+#: luma-commerce-core.php:1917
+msgid "Luma Commerce Block"
+msgstr ""
+
+#: luma-commerce-core.php:1921
+msgid "Luma block"
+msgstr ""
+
+#: luma-commerce-core.php:1922
+msgid "Block type"
+msgstr ""
+
+#: luma-commerce-core.php:253
+#: luma-commerce-core.php:265
+msgid "Luma unit cost"
+msgstr ""
+
+#: luma-commerce-core.php:253
+msgid "Optional cost used for the Luma product-profit estimate. Use your real unit cost; leave blank when it is unknown."
+msgstr ""
+
+#: luma-commerce-core.php:265
+msgid "Optional real unit cost for profit reporting. Blank variations use the parent product cost."
+msgstr ""
+
+#: luma-commerce-core.php:332
+msgid "Guest customer"
+msgstr ""
+
+#: luma-commerce-core.php:332
+#: luma-commerce-core.php:333
+msgid "Unspecified"
+msgstr ""
+
+#: luma-commerce-core.php:389
+msgid "Shop page"
+msgstr ""
+
+#: luma-commerce-core.php:389
+msgid "Configured"
+msgstr ""
+
+#: luma-commerce-core.php:389
+msgid "Choose a shop page"
+msgstr ""
+
+#: luma-commerce-core.php:390
+#: luma-commerce-core.php:405
+#: luma-commerce-core.php:452
+msgid "Payments"
+msgstr ""
+
+#: luma-commerce-core.php:390
+msgid "%d gateway available"
+msgid_plural "%d gateways available"
+msgstr[0] ""
+msgstr[1] ""
+
+#: luma-commerce-core.php:390
+msgid "Review payment setup"
+msgstr ""
+
+#: luma-commerce-core.php:391
+msgid "Shipping zones"
+msgstr ""
+
+#: luma-commerce-core.php:391
+msgid "%d zone configured"
+msgid_plural "%d zones configured"
+msgstr[0] ""
+msgstr[1] ""
+
+#: luma-commerce-core.php:391
+msgid "Review shipping setup"
+msgstr ""
+
+#: luma-commerce-core.php:392
+msgid "Published catalog"
+msgstr ""
+
+#: luma-commerce-core.php:392
+msgid "%d product published"
+msgid_plural "%d products published"
+msgstr[0] ""
+msgstr[1] ""
+
+#: luma-commerce-core.php:393
+msgid "Store connection"
+msgstr ""
+
+#: luma-commerce-core.php:393
+msgid "HTTPS enabled"
+msgstr ""
+
+#: luma-commerce-core.php:393
+msgid "Use HTTPS before launch"
+msgstr ""
+
+#: luma-commerce-core.php:399
+msgid "New product"
+msgstr ""
+
+#: luma-commerce-core.php:399
+msgid "Add a catalog piece"
+msgstr ""
+
+#: luma-commerce-core.php:400
+#: luma-commerce-core.php:449
+#: luma-commerce-core.php:452
+#: luma-commerce-core.php:456
+msgid "Orders"
+msgstr ""
+
+#: luma-commerce-core.php:400
+msgid "Fulfill and refund"
+msgstr ""
+
+#: luma-commerce-core.php:401
+#: luma-commerce-core.php:455
+msgid "Inventory"
+msgstr ""
+
+#: luma-commerce-core.php:401
+msgid "Stock and variations"
+msgstr ""
+
+#: luma-commerce-core.php:402
+msgid "Coupons"
+msgstr ""
+
+#: luma-commerce-core.php:402
+msgid "Offers and discount codes"
+msgstr ""
+
+#: luma-commerce-core.php:403
+msgid "Customers"
+msgstr ""
+
+#: luma-commerce-core.php:403
+msgid "Orders and customer history"
+msgstr ""
+
+#: luma-commerce-core.php:404
+msgid "Analytics"
+msgstr ""
+
+#: luma-commerce-core.php:404
+msgid "Sales and store reports"
+msgstr ""
+
+#: luma-commerce-core.php:405
+msgid "Gateway configuration"
+msgstr ""
+
+#: luma-commerce-core.php:406
+msgid "Shipping"
+msgstr ""
+
+#: luma-commerce-core.php:406
+msgid "Zones and delivery rates"
+msgstr ""
+
+#: luma-commerce-core.php:407
+msgid "Storefront"
+msgstr ""
+
+#: luma-commerce-core.php:407
+msgid "Menus and pages"
+msgstr ""
+
+#: luma-commerce-core.php:408
+msgid "Design"
+msgstr ""
+
+#: luma-commerce-core.php:408
+msgid "Customizer and Elementor"
+msgstr ""
+
+#: luma-commerce-core.php:409
+#: luma-commerce-core.php:446
+msgid "Luma settings"
+msgstr ""
+
+#: luma-commerce-core.php:409
+msgid "Features and merchandising"
+msgstr ""
+
+#: luma-commerce-core.php:410
+msgid "Demo store"
+msgstr ""
+
+#: luma-commerce-core.php:410
+msgid "Install or update demo"
+msgstr ""
+
+#: luma-commerce-core.php:415
+msgid "You do not have permission to export this report."
+msgstr ""
+
+#: luma-commerce-core.php:416
+msgid "WooCommerce is required to export this report."
+msgstr ""
+
+#: luma-commerce-core.php:435
+msgid "You do not have permission to view this page."
+msgstr ""
+
+#: luma-commerce-core.php:436
+msgid "WooCommerce is required before Luma can calculate store analytics."
+msgstr ""
+
+#: luma-commerce-core.php:438
+msgid "Last 7 days"
+msgstr ""
+
+#: luma-commerce-core.php:438
+msgid "Last 30 days"
+msgstr ""
+
+#: luma-commerce-core.php:438
+msgid "Last 90 days"
+msgstr ""
+
+#: luma-commerce-core.php:438
+msgid "Last 365 days"
+msgstr ""
+
+#: luma-commerce-core.php:446
+msgid "Dashboard"
+msgstr ""
+
+#: luma-commerce-core.php:446
+msgid "A clear view of your real WooCommerce store performance."
+msgstr ""
+
+#: luma-commerce-core.php:446
+msgid "Period"
+msgstr ""
+
+#: luma-commerce-core.php:446
+#: luma-commerce-core.php:800
+msgid "Apply"
+msgstr ""
+
+#: luma-commerce-core.php:446
+msgid "View orders"
+msgstr ""
+
+#: luma-commerce-core.php:446
+msgid "Payment settings"
+msgstr ""
+
+#: luma-commerce-core.php:446
+msgid "Export CSV"
+msgstr ""
+
+#: luma-commerce-core.php:447
+msgid "Control center"
+msgstr ""
+
+#: luma-commerce-core.php:447
+msgid "Essential controls"
+msgstr ""
+
+#: luma-commerce-core.php:447
+msgid "The daily store actions, in one place."
+msgstr ""
+
+#: luma-commerce-core.php:448
+msgid "Launch check"
+msgstr ""
+
+#: luma-commerce-core.php:448
+msgid "Store readiness"
+msgstr ""
+
+#: luma-commerce-core.php:448
+msgid "Real configuration checks, not assumptions."
+msgstr ""
+
+#: luma-commerce-core.php:449
+msgid "Net revenue"
+msgstr ""
+
+#: luma-commerce-core.php:449
+msgid "Processing, completed and on-hold"
+msgstr ""
+
+#: luma-commerce-core.php:449
+msgid "Units sold"
+msgstr ""
+
+#: luma-commerce-core.php:449
+msgid "After recorded item refunds"
+msgstr ""
+
+#: luma-commerce-core.php:449
+msgid "Average order value"
+msgstr ""
+
+#: luma-commerce-core.php:449
+msgid "After recorded refunds"
+msgstr ""
+
+#: luma-commerce-core.php:449
+msgid "Refunds"
+msgstr ""
+
+#: luma-commerce-core.php:449
+msgid "Recorded WooCommerce refunds"
+msgstr ""
+
+#: luma-commerce-core.php:450
+msgid "Recent rhythm"
+msgstr ""
+
+#: luma-commerce-core.php:450
+msgid "Sales trend"
+msgstr ""
+
+#: luma-commerce-core.php:450
+msgid "Last %d day"
+msgid_plural "Last %d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: luma-commerce-core.php:450
+msgid "Sales for the last %d day"
+msgid_plural "Sales for the last %d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: luma-commerce-core.php:451
+msgid "Collection"
+msgstr ""
+
+#: luma-commerce-core.php:451
+msgid "Top products"
+msgstr ""
+
+#: luma-commerce-core.php:1119
+#: luma-commerce-core.php:451
+#: luma-commerce-core.php:455
+msgid "Product"
+msgstr ""
+
+#: luma-commerce-core.php:451
+msgid "Qty"
+msgstr ""
+
+#: luma-commerce-core.php:451
+msgid "Revenue"
+msgstr ""
+
+#: luma-commerce-core.php:451
+#: luma-commerce-core.php:454
+msgid "No qualifying orders in this period."
+msgstr ""
+
+#: luma-commerce-core.php:452
+msgid "Payment methods"
+msgstr ""
+
+#: luma-commerce-core.php:452
+msgid "Method"
+msgstr ""
+
+#: luma-commerce-core.php:452
+#: luma-commerce-core.php:454
+msgid "Net"
+msgstr ""
+
+#: luma-commerce-core.php:452
+msgid "No payment data in this period."
+msgstr ""
+
+#: luma-commerce-core.php:453
+msgid "Profit lens"
+msgstr ""
+
+#: luma-commerce-core.php:453
+msgid "Profit analysis"
+msgstr ""
+
+#: luma-commerce-core.php:453
+msgid "Product profit"
+msgstr ""
+
+#: luma-commerce-core.php:453
+msgid "Operating estimate"
+msgstr ""
+
+#: luma-commerce-core.php:453
+msgid "%d%% of sold units have a real cost recorded."
+msgstr ""
+
+#: luma-commerce-core.php:453
+msgid "Configured operating deductions: payment fees %s, fulfillment %s per order and overhead %s per order."
+msgstr ""
+
+#: luma-commerce-core.php:453
+msgid "These are merchant-entered estimates. Gateway fees, tax, shipping overhead or other costs not entered in Settings are excluded."
+msgstr ""
+
+#: luma-commerce-core.php:453
+msgid "Add a real unit cost to products to calculate product and operating profit. Luma never estimates unknown costs."
+msgstr ""
+
+#: luma-commerce-core.php:454
+msgid "Operations"
+msgstr ""
+
+#: luma-commerce-core.php:454
+msgid "Recent orders"
+msgstr ""
+
+#: luma-commerce-core.php:454
+msgid "Open all orders"
+msgstr ""
+
+#: luma-commerce-core.php:454
+msgid "Order"
+msgstr ""
+
+#: luma-commerce-core.php:454
+msgid "Customer"
+msgstr ""
+
+#: luma-commerce-core.php:454
+msgid "Payment"
+msgstr ""
+
+#: luma-commerce-core.php:454
+msgid "Status"
+msgstr ""
+
+#: luma-commerce-core.php:455
+msgid "Low-stock alerts"
+msgstr ""
+
+#: luma-commerce-core.php:455
+msgid "Products"
+msgstr ""
+
+#: luma-commerce-core.php:455
+msgid "Units left"
+msgstr ""
+
+#: luma-commerce-core.php:455
+msgid "No public managed-stock products are below the alert threshold."
+msgstr ""
+
+#: luma-commerce-core.php:456
+msgid "Promotions"
+msgstr ""
+
+#: luma-commerce-core.php:456
+msgid "Coupon usage"
+msgstr ""
+
+#: luma-commerce-core.php:456
+msgid "Coupon"
+msgstr ""
+
+#: luma-commerce-core.php:456
+msgid "No coupon codes were used in this period."
+msgstr ""
+
+#: luma-commerce-core.php:457
+msgid "Data note"
+msgstr ""
+
+#: luma-commerce-core.php:457
+msgid "Figures use native WooCommerce orders from %s. Refunds are subtracted from net revenue. Cancelled, failed and pending orders are excluded."
+msgstr ""
+
+#: luma-commerce-core.php:457
+msgid "Open Luma settings"
+msgstr ""
+
+#: luma-commerce-core.php:537
+msgid "Current offers"
+msgstr ""
+
+#: luma-commerce-core.php:537
+msgid "Shop the edit"
+msgstr ""
+
+#: luma-commerce-core.php:555
+msgid "You unlocked free delivery"
+msgstr ""
+
+#: luma-commerce-core.php:561
+msgid "Offer ends in"
+msgstr ""
+
+#: luma-commerce-core.php:572
+#: luma-commerce-core.php:653
+msgid "Shipping & returns"
+msgstr ""
+
+#: luma-commerce-core.php:572
+msgid "See store policy"
+msgstr ""
+
+#: luma-commerce-core.php:573
+#: luma-commerce-core.php:654
+msgid "Secure checkout"
+msgstr ""
+
+#: luma-commerce-core.php:573
+msgid "Protected connection"
+msgstr ""
+
+#: luma-commerce-core.php:576
+#: luma-commerce-core.php:652
+msgid "Cash on delivery"
+msgstr ""
+
+#: luma-commerce-core.php:576
+msgid "Pay on delivery"
+msgstr ""
+
+#: luma-commerce-core.php:577
+#: luma-commerce-core.php:655
+msgid "WhatsApp support"
+msgstr ""
+
+#: luma-commerce-core.php:577
+msgid "Message the store"
+msgstr ""
+
+#: luma-commerce-core.php:587
+msgid "Size guide"
+msgstr ""
+
+#: luma-commerce-core.php:587
+msgid "Find your fit"
+msgstr ""
+
+#: luma-commerce-core.php:587
+msgid "Luma size guide"
+msgstr ""
+
+#: luma-commerce-core.php:587
+msgid "Use your usual size. For an oversized fit, move up one size."
+msgstr ""
+
+#: luma-commerce-core.php:587
+msgid "Measurements shown in inches. Always check the product description for a specific fit note."
+msgstr ""
+
+#: luma-commerce-core.php:596
+#: luma-commerce-core.php:617
+#: luma-commerce-core.php:870
+msgid "Compare"
+msgstr ""
+
+#: luma-commerce-core.php:602
+#: luma-commerce-core.php:951
+msgid "Your edit"
+msgstr ""
+
+#: luma-commerce-core.php:602
+msgid "Loading your edit…"
+msgstr ""
+
+#: luma-commerce-core.php:618
+#: luma-commerce-core.php:871
+msgid "Quick view"
+msgstr ""
+
+#: luma-commerce-core.php:1230
+#: luma-commerce-core.php:1412
+#: luma-commerce-core.php:1459
+#: luma-commerce-core.php:618
+#: luma-commerce-core.php:871
+msgid "Quick add"
+msgstr ""
+
+#: luma-commerce-core.php:626
+msgid "Add to bag"
+msgstr ""
+
+#: luma-commerce-core.php:626
+#: luma-commerce-core.php:633
+msgid "Buy now"
+msgstr ""
+
+#: luma-commerce-core.php:633
+msgid "Share"
+msgstr ""
+
+#: luma-commerce-core.php:648
+#: luma-commerce-core.php:759
+#: luma-commerce-core.php:866
+msgid "Only %d left"
+msgstr ""
+
+#: luma-commerce-core.php:649
+msgid "In stock · ready to ship"
+msgstr ""
+
+#: luma-commerce-core.php:650
+msgid "Popular pick"
+msgstr ""
+
+#: luma-commerce-core.php:1457
+#: luma-commerce-core.php:758
+#: luma-commerce-core.php:865
+msgid "Sale"
+msgstr ""
+
+#: luma-commerce-core.php:1457
+#: luma-commerce-core.php:760
+msgid "Popular"
+msgstr ""
+
+#: luma-commerce-core.php:1458
+#: luma-commerce-core.php:1491
+#: luma-commerce-core.php:767
+#: luma-commerce-core.php:867
+msgid "Rated %s out of 5"
+msgstr ""
+
+#: luma-commerce-core.php:1410
+#: luma-commerce-core.php:767
+#: luma-commerce-core.php:867
+msgid "%d review"
+msgid_plural "%d reviews"
+msgstr[0] ""
+msgstr[1] ""
+
+#: luma-commerce-core.php:790
+msgid "Refine the edit"
+msgstr ""
+
+#: luma-commerce-core.php:790
+#: luma-commerce-core.php:792
+msgid "Filters"
+msgstr ""
+
+#: luma-commerce-core.php:792
+#: luma-commerce-core.php:802
+msgid "Close filters"
+msgstr ""
+
+#: luma-commerce-core.php:793
+msgid "Category"
+msgstr ""
+
+#: luma-commerce-core.php:793
+msgid "All"
+msgstr ""
+
+#: luma-commerce-core.php:794
+msgid "Min price"
+msgstr ""
+
+#: luma-commerce-core.php:795
+msgid "Max price"
+msgstr ""
+
+#: luma-commerce-core.php:796
+msgid "Sort"
+msgstr ""
+
+#: luma-commerce-core.php:796
+msgid "Latest"
+msgstr ""
+
+#: luma-commerce-core.php:796
+msgid "Price: low to high"
+msgstr ""
+
+#: luma-commerce-core.php:796
+msgid "Price: high to low"
+msgstr ""
+
+#: luma-commerce-core.php:796
+msgid "Most loved"
+msgstr ""
+
+#: luma-commerce-core.php:800
+msgid "Reset"
+msgstr ""
+
+#: luma-commerce-core.php:88
+#: luma-commerce-core.php:985
+msgid "Added to bag"
+msgstr ""
+
+#: luma-commerce-core.php:89
+msgid "Please choose an option or try again."
+msgstr ""
+
+#: luma-commerce-core.php:90
+msgid "Searching…"
+msgstr ""
+
+#: luma-commerce-core.php:1381
+#: luma-commerce-core.php:91
+msgid "No products found."
+msgstr ""
+
+#: luma-commerce-core.php:917
+msgid "Product filters are unavailable."
+msgstr ""
+
+#: luma-commerce-core.php:918
+msgid "Filters are disabled."
+msgstr ""
+
+#: luma-commerce-core.php:1514
+#: luma-commerce-core.php:790
+#: luma-commerce-core.php:92
+msgid "pieces"
+msgstr ""
+
+#: luma-commerce-core.php:93
+msgid "Active:"
+msgstr ""
+
+#: luma-commerce-core.php:937
+msgid "No products found for these filters."
+msgstr ""
+
+#: luma-commerce-core.php:94
+msgid "Min"
+msgstr ""
+
+#: luma-commerce-core.php:95
+msgid "Max"
+msgstr ""
+
+#: luma-commerce-core.php:951
+msgid "Shopping bag"
+msgstr ""
+
+#: luma-commerce-core.php:951
+msgid "Your bag"
+msgstr ""
+
+#: luma-commerce-core.php:951
+#: luma-commerce-core.php:991
+msgid "Your bag is ready when you are."
+msgstr ""
+
+#: luma-commerce-core.php:951
+msgid "Subtotal"
+msgstr ""
+
+#: luma-commerce-core.php:951
+msgid "View bag"
+msgstr ""
+
+#: luma-commerce-core.php:951
+msgid "Checkout"
+msgstr ""
+
+#: luma-commerce-core.php:954
+msgid "items ready to compare"
+msgstr ""
+
+#: luma-commerce-core.php:954
+msgid "Compare now"
+msgstr ""
+
+#: luma-commerce-core.php:956
+msgid "Chat on WhatsApp"
+msgstr ""
+
+#: luma-commerce-core.php:956
+msgid "Chat with us"
+msgstr ""
+
+#: luma-commerce-core.php:957
+msgid "Help us improve the Luma edit"
+msgstr ""
+
+#: luma-commerce-core.php:957
+msgid "Allow anonymous campaign and storefront measurement. No email, account or personal profile is sent."
+msgstr ""
+
+#: luma-commerce-core.php:957
+msgid "Allow measurement"
+msgstr ""
+
+#: luma-commerce-core.php:957
+msgid "Not now"
+msgstr ""
+
+#: luma-commerce-core.php:1411
+#: luma-commerce-core.php:797
+#: luma-commerce-core.php:96
+msgid "In stock"
+msgstr ""
+
+#: luma-commerce-core.php:798
+#: luma-commerce-core.php:97
+msgid "On sale"
+msgstr ""
+
+#: luma-commerce-core.php:972
+msgid "A little something extra"
+msgstr ""
+
+#: luma-commerce-core.php:1114
+#: luma-commerce-core.php:972
+msgid "Email address"
+msgstr ""
+
+#: luma-commerce-core.php:972
+msgid "Your email address"
+msgstr ""
+
+#: luma-commerce-core.php:972
+msgid "Unlock offer"
+msgstr ""
+
+#: luma-commerce-core.php:972
+msgid "Use code"
+msgstr ""
+
+#: luma-commerce-core.php:972
+msgid "Copy code"
+msgstr ""
+
+#: luma-commerce-core.php:972
+msgid "Coupon terms apply. You can unsubscribe anytime."
+msgstr ""
+
+#: luma-commerce-core.php:979
+msgid "Quick add is disabled."
+msgstr ""
+
+#: luma-commerce-core.php:98
+msgid "Clear all"
+msgstr ""
+
+#: luma-commerce-core.php:1247
+#: luma-commerce-core.php:1255
+#: luma-commerce-core.php:1269
+#: luma-commerce-core.php:1296
+#: luma-commerce-core.php:1349
+#: luma-commerce-core.php:1570
+#: luma-commerce-core.php:980
+msgid "Cart is unavailable."
+msgstr ""
+
+#: luma-commerce-core.php:982
+msgid "This item is not available."
+msgstr ""
+
+#: luma-commerce-core.php:983
+msgid "Could not add this item."
+msgstr ""
+
+#: luma-commerce-core.php:595
+#: luma-commerce-core.php:616
+#: luma-commerce-core.php:869
+#: luma-commerce-core.php:99
+msgid "Add to wish list"
+msgstr ""
+
+#: luma-commerce-core.php:996
+msgid "Save for later"
+msgstr ""
+
+#: luma-commerce-core.php:996
+msgid "Decrease quantity"
+msgstr ""
+
+#: luma-commerce-core.php:996
+msgid "Increase quantity"
+msgstr ""
+
+#: luma-commerce-core.php:1196
+#: luma-commerce-core.php:1202
+#: luma-commerce-core.php:1400
+#: luma-commerce-core.php:996
+msgid "Remove"
+msgstr ""

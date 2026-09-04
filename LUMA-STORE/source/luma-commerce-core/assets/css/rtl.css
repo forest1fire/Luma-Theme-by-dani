@@ -1,0 +1,13 @@
+/* Luma Core RTL adjustments. Layout remains usable with either text direction. */
+html[dir="rtl"] .luma-cart-drawer__panel { right:auto; left:0; }
+html[dir="rtl"] .luma-offer-popup__close { right:auto; left:15px; }
+html[dir="rtl"] .luma-recommendation__image > span { left:auto; right:10px; }
+html[dir="rtl"] .luma-loop-signal { margin-left:0; margin-right:8px; }
+html[dir="rtl"] .luma-lead-status, html[dir="rtl"] .luma-order-bump__status { margin-left:0; margin-right:10px; }
+html[dir="rtl"] .luma-analytics-consent .luma-analytics-consent__reject { margin-left:0; margin-right:6px; }
+@media (max-width:760px) {
+    html[dir="rtl"] .luma-cart-drawer__panel { right:auto; left:0; }
+}
+@media (max-width:760px) {
+    html[dir="rtl"] .luma-shop-toolbar__controls.is-open { right:auto; left:0; border-left:0; border-right:1px solid var(--luma-line,rgba(0,0,0,.14)); box-shadow:18px 0 40px rgba(0,0,0,.18); }
+}

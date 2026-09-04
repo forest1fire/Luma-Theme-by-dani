@@ -1,0 +1,64 @@
+.luma-admin-page { max-width:1320px; margin:25px 20px 40px 0; color:#171715; }
+.luma-dashboard__header { display:flex; justify-content:space-between; gap:30px; align-items:flex-end; margin:25px 0 28px; padding:30px; background:#171715; color:#fff; }
+.luma-admin-kicker { margin:0 0 7px; color:#a39e93; font-size:10px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; }
+.luma-dashboard__header h1 { margin:0; color:#fff; font-size:clamp(32px,4vw,54px); font-weight:700; letter-spacing:-.06em; line-height:.9; }
+.luma-dashboard__header p:not(.luma-admin-kicker) { margin:12px 0 0; color:#d6d0c5; font-size:13px; }
+.luma-dashboard__range { display:flex; align-items:center; gap:10px; white-space:nowrap; }
+.luma-dashboard__range label { color:#c3bdb2; font-size:11px; text-transform:uppercase; letter-spacing:.1em; }
+.luma-dashboard__range select { min-width:145px; height:36px; border:1px solid #716b61; background:#292926; color:#fff; }
+.luma-dashboard__actions { display:flex; flex-wrap:wrap; gap:7px; margin-left:auto; }
+.luma-dashboard__actions .button { border-color:#716b61; background:transparent; color:#fff; }
+.luma-dashboard__actions .button:hover, .luma-dashboard__actions .button:focus { border-color:#fff; background:#fff; color:#171715; }
+.luma-dashboard__cards { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:12px; margin-bottom:12px; }
+.luma-dashboard-quick-panel, .luma-dashboard-health-panel { margin-bottom:12px; }
+.luma-dashboard-quick-links { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; }
+.luma-dashboard-quick-link { position:relative; min-height:76px; display:flex; flex-direction:column; justify-content:center; gap:5px; padding:13px 34px 13px 14px; border:1px solid #d9d4ca; background:#fbfaf7; color:#171715; text-decoration:none; transition:border-color .2s,background .2s,transform .2s; }
+.luma-dashboard-quick-link:hover, .luma-dashboard-quick-link:focus { border-color:#d44a2c; background:#fff4ef; color:#171715; transform:translateY(-2px); }
+.luma-dashboard-quick-link strong { font-size:12px; line-height:1.1; }
+.luma-dashboard-quick-link span { color:#77736c; font-size:10px; line-height:1.25; }
+.luma-dashboard-quick-link b { position:absolute; top:12px; right:12px; color:#d44a2c; font-size:15px; font-weight:400; }
+.luma-dashboard-health-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:8px; }
+.luma-dashboard-health-item { display:flex; align-items:center; gap:9px; min-width:0; padding:12px 10px; border:1px solid #d9d4ca; color:#171715; text-decoration:none; }
+.luma-dashboard-health-item:hover, .luma-dashboard-health-item:focus { border-color:#171715; color:#171715; }
+.luma-dashboard-health-item > span:nth-child(2) { min-width:0; flex:1; }
+.luma-dashboard-health-item strong, .luma-dashboard-health-item small { display:block; }
+.luma-dashboard-health-item strong { font-size:11px; }
+.luma-dashboard-health-item small { overflow:hidden; margin-top:3px; color:#77736c; font-size:9px; text-overflow:ellipsis; white-space:nowrap; }
+.luma-dashboard-health-item > b { color:#77736c; font-size:14px; font-weight:400; }
+.luma-dashboard-health-icon { flex:0 0 auto; display:grid; width:23px; height:23px; place-items:center; border-radius:50%; background:#eeeae3; color:#77736c; font-size:12px; font-weight:700; }
+.luma-dashboard-health-icon.is-ready { background:#e3f1e8; color:#24754c; }
+.luma-dashboard-health-icon.needs-review { background:#fff0e8; color:#b83225; }
+.luma-dashboard__cards article { min-height:125px; padding:20px; background:#fff; border:1px solid #d9d4ca; box-shadow:0 4px 14px rgba(23,23,21,.04); }
+.luma-dashboard__cards article span { display:block; color:#77736c; font-size:10px; letter-spacing:.1em; text-transform:uppercase; }
+.luma-dashboard__cards article strong { display:block; margin:18px 0 8px; font-size:27px; font-weight:700; letter-spacing:-.06em; line-height:1; }
+.luma-dashboard__cards article small { color:#77736c; font-size:11px; }
+.luma-dashboard__grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+.luma-dashboard-panel { min-width:0; padding:22px; background:#fff; border:1px solid #d9d4ca; box-shadow:0 4px 14px rgba(23,23,21,.04); }
+.luma-dashboard-panel--wide { grid-column:1 / -1; }
+.luma-dashboard-panel__heading { display:flex; align-items:flex-start; justify-content:space-between; gap:15px; margin-bottom:20px; }
+.luma-dashboard-panel__heading h2 { margin:0; color:#171715; font-size:24px; letter-spacing:-.05em; line-height:1; }
+.luma-dashboard-panel__heading small { color:#77736c; font-size:11px; }
+.luma-dashboard-table { border:0; box-shadow:none; }
+.luma-dashboard-table th { color:#77736c; font-size:10px; letter-spacing:.08em; text-transform:uppercase; }
+.luma-dashboard-table td { vertical-align:middle; }
+.luma-dashboard-table__subline { display:block; margin-top:3px; color:#77736c; font-size:10px; }
+.luma-dashboard-table td:last-child, .luma-dashboard-table th:last-child { text-align:right; }
+.luma-sales-chart { display:flex; align-items:flex-end; gap:8px; height:205px; padding:20px 0 0; border-bottom:1px solid #d9d4ca; }
+.luma-sales-chart__day { display:flex; flex:1; min-width:0; height:100%; flex-direction:column; align-items:center; justify-content:flex-end; gap:8px; }
+.luma-sales-chart__bar { width:100%; max-width:28px; min-height:5px; background:#d44a2c; border-radius:2px 2px 0 0; }
+.luma-sales-chart__day small { color:#77736c; font-size:9px; white-space:nowrap; transform:rotate(-35deg); transform-origin:top center; }
+.luma-dashboard-profit { display:block; margin:18px 0 12px; font-size:37px; letter-spacing:-.07em; line-height:1; }
+.luma-dashboard-profit-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; margin:18px 0 12px; }
+.luma-dashboard-profit-grid span { display:block; color:#77736c; font-size:10px; letter-spacing:.1em; text-transform:uppercase; }
+.luma-dashboard-profit-grid strong { display:block; margin-top:9px; font-size:29px; letter-spacing:-.06em; line-height:1; }
+.luma-dashboard-note { max-width:520px; margin:8px 0; color:#77736c; font-size:12px; line-height:1.55; }
+.luma-dashboard-empty { color:#77736c; font-size:13px; }
+.luma-dashboard-panel--note { display:flex; flex-wrap:wrap; align-items:center; gap:12px 22px; margin-top:12px; background:#f1ede6; border-color:#e0dbd2; }
+.luma-dashboard-panel--note strong { font-size:12px; text-transform:uppercase; letter-spacing:.08em; }
+.luma-dashboard-panel--note span { flex:1; min-width:220px; color:#77736c; font-size:12px; }
+.luma-dashboard-panel--note .button { margin-left:auto; }
+@media (max-width:1100px) { .luma-dashboard__cards { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+@media (max-width:900px) { .luma-dashboard__header { flex-wrap:wrap; align-items:flex-start; } .luma-dashboard__range { margin-left:auto; } .luma-dashboard__actions { margin-left:0; } .luma-dashboard__cards { grid-template-columns:repeat(2,minmax(0,1fr)); } .luma-dashboard__grid { grid-template-columns:1fr; } .luma-dashboard-panel--wide { grid-column:auto; } }
+@media (max-width:1100px) { .luma-dashboard-quick-links { grid-template-columns:repeat(3,minmax(0,1fr)); } .luma-dashboard-health-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+@media (max-width:900px) { .luma-dashboard-quick-links, .luma-dashboard-health-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (max-width:600px) { .luma-admin-page { margin-right:10px; } .luma-dashboard__header { display:block; padding:22px; } .luma-dashboard__range { margin-top:24px; } .luma-dashboard__cards { grid-template-columns:1fr; } .luma-dashboard-panel { padding:16px; overflow:auto; } .luma-dashboard-quick-links, .luma-dashboard-health-grid { grid-template-columns:1fr; } .luma-sales-chart { min-width:620px; } .luma-dashboard-panel--note .button { margin-left:0; } }

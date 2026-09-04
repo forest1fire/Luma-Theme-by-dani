@@ -1,0 +1,17 @@
+/* Luma RTL support: layout stays logical while preserving the editorial grid. */
+html[dir="rtl"] { direction: rtl; }
+html[dir="rtl"] .luma-header-actions,
+html[dir="rtl"] .luma-footer-bottom,
+html[dir="rtl"] .luma-section-heading,
+html[dir="rtl"] .luma-shop-toolbar,
+html[dir="rtl"] .luma-bundle__heading { direction: rtl; }
+html[dir="rtl"] .luma-menu,
+html[dir="rtl"] .luma-header-actions { flex-direction: row-reverse; }
+html[dir="rtl"] .luma-menu-toggle { text-align: right; }
+html[dir="rtl"] .luma-menu > li.menu-item-has-children:not(.luma-menu-mega) > .sub-menu { left: auto; right: -15px; }
+html[dir="rtl"] .luma-offer-popup__close { left: 15px; right: auto; }
+html[dir="rtl"] .luma-cart-drawer__panel { left: 0; right: auto; }
+html[dir="rtl"] .luma-whatsapp { left: 20px; right: auto; }
+@media (max-width:760px) {
+    html[dir="rtl"] .luma-whatsapp { left: 12px; right: auto; }
+}

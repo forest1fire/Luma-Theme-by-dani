@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.wp.org/wp/6.6/theme.json",
+  "version": 3,
+  "settings": {
+    "appearanceTools": true,
+    "layout": { "contentSize": "1320px", "wideSize": "1440px" },
+    "color": {
+      "defaultPalette": false,
+      "palette": [
+        { "slug": "ink", "color": "#171715", "name": "Ink" },
+        { "slug": "paper", "color": "#f5f2ec", "name": "Paper" },
+        { "slug": "surface", "color": "#fbfaf7", "name": "Surface" },
+        { "slug": "accent", "color": "#d54b31", "name": "Signal" }
+      ]
+    },
+    "spacing": { "units": ["px", "rem", "%", "vw", "vh"] },
+    "typography": { "fluid": true, "fontSizes": [] }
+  },
+  "styles": {
+    "color": { "background": "var:preset|color|paper", "text": "var:preset|color|ink" },
+    "elements": { "button": { "border": { "radius": "0px" } } }
+  }
+}
